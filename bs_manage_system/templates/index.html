@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+</head>
+<body>
+this is my manage system index
+<div id="main">
+    {{ls}}
+</div>
+<script>
+    let vm = new Vue({
+       el:'#main',
+       data:{
+           ls:'zhe'
+       }
+    });
+</script>
+</body>
+</html>

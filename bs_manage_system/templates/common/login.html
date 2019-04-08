@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>科研管理系统登录</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <script src="${STATIC_URL}assets/jquery/jquery-3.1.1.min.js"></script>
+    <script src="${STATIC_URL}js/jquery.base64.js"></script>
+
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+    </script>
+    <link href="${STATIC_URL}css/login/style.css" rel='stylesheet' type='text/css'/>
+</head>
+<script>
+    $(document).ready(function (c) {
+        $('.close').on('click', function (c) {
+            $('.login-form').fadeOut('slow', function (c) {
+                $('.login-form').remove();
+            });
+        });
+    });
+</script>
+<!--SIGN UP-->
+<h1>**高校科研管理系统</h1>
+<div class="login-form">
+    <div class="close"></div>
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"></div>
+    <div class="avtar">
+        <img src="${STATIC_URL}images/login/avtar.png"/>
+    </div>
+    <form>
+        <input type="text" class="text" value="Username" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Username';}">
+        <div class="key">
+            <input type="password" value="Password" onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Password';}">
+        </div>
+    </form>
+    <div class="signin">
+        <input type="submit" value="Login">
+    </div>
+</div>
+<div class="copy-rights">
+    <p>Copyright &copy; 2019.Company name All rights reserved.
+    </p>
+</div>
+
+</body>
+</html>
