@@ -26,6 +26,7 @@
     </script>
     <link href="${STATIC_URL}css/login/style.css" rel='stylesheet' type='text/css'/>
 </head>
+<body style="overflow-x:hidden;overflow-y:scroll">
 <script>
     $(document).ready(function (c) {
         $('.close').on('click', function (c) {
@@ -49,15 +50,15 @@
         <img src="${STATIC_URL}images/login/avtar.png"/>
     </div>
     <form>
-        <input type="text" class="text" value="Username" onfocus="this.value = '';"
+        <input type="text" class="text" :value="user.username" onfocus="this.value = '';"
                onblur="if (this.value == '') {this.value = 'Username';}">
         <div class="key">
-            <input type="password" value="Password" onfocus="this.value = '';"
+            <input type="password" :value="user.password" onfocus="this.value = '';"
                    onblur="if (this.value == '') {this.value = 'Password';}">
         </div>
     </form>
     <div class="signin">
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" @click="user_login">
     </div>
 </div>
 <div class="copy-rights">
@@ -65,5 +66,34 @@
     </p>
 </div>
 
+
+<script>
+    let vm = new Vue({
+        el:".login-form",
+        data: {
+            user:{
+                username:'admin',
+                password:'123456',
+            }
+
+        },
+        methods:{
+            user_login(){
+                console.log('登陆');
+                axios({
+                    url:'${SITE_URL}user_login/',
+                    method:'post',
+                    data: vm.user
+                }).then( res => {
+                    console.log(res);
+                    window.location.href = '${SITE_URL}main/'
+                }).catch( res => {
+                    console.log(res)
+                })
+            }
+        }
+
+    })
+</script>
 </body>
 </html>

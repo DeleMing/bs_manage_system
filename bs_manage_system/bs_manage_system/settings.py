@@ -54,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',  # 依赖于会话Session
     'django.middleware.clickjacking.XFrameOptionsMiddleware',  # 防止点击劫持
     'django.middleware.security.SecurityMiddleware',  # 缓存配置，必须在最后一个
+    'public_module.mymiddleware.SimpleMiddleware'  # 登录拦截器
 )
 
 # 总路由设置
@@ -112,11 +113,11 @@ finally:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 默认用mysql
-        'NAME': 'science_manage',  # 数据库名 (默认与APP_ID相同)
+        'NAME': 'bs_manage_system',  # 数据库名 (默认与APP_ID相同)
         'USER': 'root',  # 你的数据库user
         'PASSWORD': '123456',  # 你的数据库password
-        # 'HOST': '127.0.0.1',                                # 开发的时候，使用localhost
-        'HOST': '47.102.195.55',  # 开发的时候，使用localhost
+        'HOST': '127.0.0.1',                                # 开发的时候，使用localhost
+        # 'HOST': '47.102.195.55',  # 开发的时候，使用localhost
         'PORT': '3306',  # 默认3306
     },
 }

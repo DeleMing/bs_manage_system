@@ -204,11 +204,9 @@
                     if (res.data.code == 0){
                         vm.user.name = res.data.results.username;
                     }else {
-                        window.location.href = '/login';
                     }
                 }).catch( (res) =>{
                     console.log((res));
-                    window.location.href = '/login';
                 })
             },
             change_html(res){
