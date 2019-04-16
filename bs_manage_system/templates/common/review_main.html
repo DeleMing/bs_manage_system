@@ -1,0 +1,223 @@
+<!DOCTYPE html style="height: 100%;">
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+
+    <!--页面初始化css(Tencent)-->
+    <link href="${STATIC_URL}css/common/init.css" rel="stylesheet">
+    <!--本页面css-->
+    <link href="${STATIC_URL}css/common/main.css" rel="stylesheet">
+    <!--阿里巴巴矢量图标库--项目完成后请下载css并下载css引用的字体文件-->
+    <link href="http://at.alicdn.com/t/font_997278_ptr5bdmor4j.css" rel="stylesheet">
+</head>
+<body style="height: 100%">
+<div id="app" style="height: 100%;">
+    <!--start container-->
+    <el-container style="height: 100%;">
+
+        <!--start left-->
+        <el-row class="tac" style="height: 100%;background-color: #283593;">
+            <el-menu :style="height" class="el-menu-vertical-demo" @open="handleOpen"
+                     @close="handleClose" :collapse="isCollapse" style="height: 100%">
+                <el-menu-item index="1000" class="title_item">
+                    <i class=""></i>
+                    <li slot="title" style="font-size: 18px;">科研管理系统</li>
+                </el-menu-item>
+
+                <el-menu-item index="2" style="height: 44px;line-height: 44px;" v-on:click="change_html('html1')">
+                    <i class="iconfont icon-jiankong"></i>
+                    <span slot="title" style="width: 200px">科研项目申报</span>
+                </el-menu-item>
+
+                <el-menu-item index="3" style="height: 44px;line-height: 44px;" v-on:click="change_html('html5')">
+                    <i class="iconfont icon-changjingguanli"></i>
+                    <span slot="title">我的申请</span>
+                </el-menu-item>
+                <el-menu-item index="4" style="height: 44px;line-height: 44px;" v-on:click="change_html('html6')">
+                    <i class="iconfont icon-changjingguanli"></i>
+                    <span slot="title">个人设置</span>
+                </el-menu-item>
+
+                <el-menu-item index="1" style="height: 44px;line-height: 44px;" v-on:click="change_html('html7')">
+                    <i class="iconfont icon-changjingguanli"></i>
+                    <span slot="title">需要我审批的</span>
+                </el-menu-item>
+
+
+                <el-submenu index="5">
+                    <template slot="title">
+                        <i class="iconfont icon-xitong"></i>
+                        <span class="el-submenu">科研管理系统配置</span>
+                    </template>
+                    <el-menu-item index="5-1" v-on:click="change_html('html2')">院系配置</el-menu-item>
+                    <el-menu-item index="5-2" v-on:click="change_html('html3')">项目类型配置</el-menu-item>
+                    <el-menu-item index="5-3" v-on:click="change_html('html4')">人员管理</el-menu-item>
+                </el-submenu>
+                <div index="10000" style="line-height: 56px;margin-left: 20px;height: 60%;">
+                    <div style="height: 90%;"></div>
+                    <i class="el-icon-question"></i>
+                    <span slot="title" :style="display1"><a href="http://baidu.com">更多操作</a></span>
+                </div>
+            </el-menu>
+        </el-row>
+        <!--end left-->
+
+        <!--start right-->
+        <el-container>
+            <!--start right header-->
+            <el-header class="header_item" height="62px">
+                <el-row :gutter="20">
+                    <el-col :span="6">
+                        <i class="iconfont icon-yincang" :style="display1" @click="changeCollapse"
+                           style="color: #555759;font-size: 30px;margin-top: 5px;"></i>
+                        <i class="iconfont icon-icon--" :style="display2" @click="changeCollapse"
+                           style="color: #555759;font-size: 25px;"></i>
+                    </el-col>
+                    <el-col :span="6" :offset="12" style="color: #000;">
+                        <div style="float: right">
+                            <span style="color: #555759; etter-spacing: 0.23px;">当前用户：</span>
+                            <span style="color: #555759; etter-spacing: 0.23px;">{{ user.name }}</span>
+                            <el-dropdown :hide-on-click="false">
+                                <span class="el-dropdown-link">
+                                  帮助中心<i class="el-icon-caret-bottom el-icon--right"></i>
+                                </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item>修改密码</el-dropdown-item>
+                                    <el-dropdown-item><a href="/user_manage/user_out" >注销</a></el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-header>
+            <!--end right header-->
+
+            <!--start right body-->
+            <el-main>
+                <iframe v-if="ifArr.html1" class="ifa" scrolling=auto
+                                src="/add_project"
+                                frameborder="0" height="1000px;"></iframe>
+                <iframe v-if="ifArr.html2" class="ifa" scrolling=auto
+                                src="/department_setting"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html3" class="ifa" scrolling=auto
+                                src="/project_type_setting"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html4" class="ifa" scrolling=auto
+                                src="/user_setting"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html5" class="ifa" scrolling=auto
+                                src="/my_apply"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html6" class="ifa" scrolling=auto
+                                src="/my_info"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html7" class="ifa" scrolling=auto
+                                src="/my_approval"
+                                frameborder="0" height="800px;"></iframe>
+            </el-main>
+            <!--end right body-->
+        </el-container>
+        <!--end right-->
+
+    </el-container>
+    <!--end container-->
+</div>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            isCollapse: false,  //是否折叠
+            height: {           //css
+                height: '',
+            },
+            user: {             //用户数据
+                name: "admin",
+            },
+            activeName: 'html1',//默认iframe选项
+            display1: {
+                display: 'inline-block',
+            },
+            display2: {
+                display: 'none',
+            },
+            activeName: 'html1',//默认iframe选项
+            ifArr: {//所有iframe页面，保留一个为true，其余均为false
+                html1: false,
+                html2: false,
+                html3: false,
+                html4: false,
+                html5: false,
+                html6: false,
+                html7: false,
+                html8: false,
+                html9: false,
+                html10: false,
+                html11: false,
+                html12: false,
+                html13: false,
+                html14: false,
+                html15: false,
+                html16: false,
+            }
+        },
+        methods:{
+            handleOpen(key, keyPath) {  //手风琴打开
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) { //手风琴关闭
+                console.log(key, keyPath);
+            },
+            changeCollapse() {          //更改伸缩状态
+                let res = this.isCollapse;
+                if (res) {
+                    this.display1.display = 'inline-block';
+                    this.display2.display = 'none';
+                } else {
+                    this.display1.display = 'none';
+                    this.display2.display = 'inline-block';
+                }
+                this.isCollapse = res ? false : true;
+            },
+            testClick(res) {            //更新iframe显示页面
+                let flagName = res;
+                this.ifArr[this.activeName] = false;
+                this.ifArr[flagName] = true;
+                this.activeName = res;
+            },
+            get_session(){
+                axios({
+                    url:'/user_manage/get_session/'
+                }).then( (res) => {
+                    console.log(res);
+                    if (res.data.code == 0){
+                        vm.user.name = res.data.results.username;
+                    }else {
+                    }
+                }).catch( (res) =>{
+                    console.log((res));
+                })
+            },
+            change_html(res){
+                let flagName = res;
+                this.ifArr[this.activeName] = false;
+                this.ifArr[flagName] = true;
+                this.activeName = res;
+            }
+        }
+    });
+    vm.get_session();
+</script>
+</body>
+</html>

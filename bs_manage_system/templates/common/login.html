@@ -79,16 +79,23 @@
         },
         methods:{
             user_login(){
-                console.log('登陆');
+                console.log('登录');
                 axios({
                     url:'${SITE_URL}user_login/',
                     method:'post',
                     data: vm.user
                 }).then( res => {
-                    console.log(res);
+                    if (res.data.code === 0){
+                        //登录成功
+                        console.log()
+                    }else{
+                        //登录失败
+                        vm.$alert(res.data.message);
+                    }
                     window.location.href = '${SITE_URL}main/'
                 }).catch( res => {
-                    console.log(res)
+                    console.log(res);
+                    vm.$alert('服务器错误！'+ res);
                 })
             }
         }
