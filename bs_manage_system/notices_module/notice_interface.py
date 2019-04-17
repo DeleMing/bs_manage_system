@@ -62,3 +62,17 @@ class NoticeInterface():
             return success_return(u'发布通知成功', [])
         except Exception as e:
             return error_return(u'新增通知失败')
+
+    @classmethod
+    def get_notice_by_id(cls, notification_id):
+        """
+        通过通知ID获取通知信息
+        :param notification_id:
+        :return:
+        """
+        try:
+            notice = Notification.objects.values().get(notification_id=notification_id)
+            notice['create_time'] = notice['create_time'].strftime("%Y-%m-%d %H:%M:%S")
+            return success_return(u'获取通知成功', notice)
+        except Exception as e:
+            return error_return(u'获取通知失败')

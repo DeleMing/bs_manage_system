@@ -39,3 +39,16 @@ class UserLoinInterface():
                 return success_return(u'登录成功', query_dict)
             else:
                 return error_return(u'密码错误')
+
+    @classmethod
+    def get_user_login_by_id(cls, user_id):
+        """
+        通过用户ID获取用户信息
+        :param user_id:
+        :return:
+        """
+        try:
+            query_result = UserLogin.objects.values().get(user_id=user_id)
+            return success_return(u'获取用户登录信息成功', query_result)
+        except Exception as e:
+            return error_return(u'获取用户登录信息失败')

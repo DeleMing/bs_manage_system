@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通知详情</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+
+
+    <!--阿里巴巴矢量图标库--项目完成后请下载css并下载css引用的字体文件-->
+    <link href="http://at.alicdn.com/t/font_997278_ptr5bdmor4j.css" rel="stylesheet">
+    <style type="text/css">
+        .news_content {
+            padding-bottom: 20px;
+            width: 920px;
+            margin: 0 auto;
+            padding-top: 20px;
+            text_indent: 2em;
+        }
+
+        .time {
+            width: 100%;
+            height: 33px;
+            line-height: 33px;
+            text-align: center;
+            background: #ececec;
+            border: 1px solid #f1f1f1;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="news_content" id="vue">
+    <h1 style="text-align: center">{{notification_title}}</h1>
+    <div class="time">发布时间：<span>{{create_time}}</span>    作者:<span>{{user_name}}</span>
+    </div>
+
+
+    <div id="vsb_content" class="context" >
+        <div class="v_news_content" v-html="notification_content">
+            {{notification_content}}
+        </div>
+    </div>
+    <div id="div_vote_id"></div>
+
+</div>
+
+<script>
+    let vm = new Vue({
+        el:'#vue',
+        data:{
+            notification_title:'',
+            notification_content:'',
+            create_user_id:'',
+            create_time:'',
+            user_name:'',
+        },
+        methods:{
+            get_notice(){
+                axios({
+                    url:'${SITE_URL}get_notice_by_session/',
+                }).then( res => {
+                    console.log(res);
+                    if (res.data.code === 0){
+                        vm.notification_content = res.data.results.notification_content;
+                        vm.notification_title = res.data.results.notification_title;
+                        vm.create_user_id = res.data.results.create_user_id;
+                        vm.create_time = res.data.results.create_time;
+                        //获取用户名称
+                        axios({
+                            url:'${SITE_URL}get_user_login_by_id/',
+                            method:'post',
+                            data: {user_id: vm.create_user_id}
+                        }).then( res => {
+                            console.log(res);
+                            if (res.data.code === 0){
+                                vm.user_name = res.data.results.user_name;
+                            }else {
+                                vm.$message('获取作者名称失败');
+                            }
+                        }).catch( res => {
+                            console.log(res);
+                            vm.$message('获取作者名称失败');
+                        })
+                    }else{
+                        vm.$message('获取通知失败')
+                    }
+                }).catch( res => {
+                    vm.$message('获取通知失败')
+                    console.log(res);
+                })
+            }
+        }
+    });
+
+    vm.get_notice()
+</script>
+</body>
+</html>

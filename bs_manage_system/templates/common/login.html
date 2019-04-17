@@ -50,11 +50,11 @@
         <img src="${STATIC_URL}images/login/avtar.png"/>
     </div>
     <form>
-        <input type="text" class="text" :value="user.username" onfocus="this.value = '';"
-               onblur="if (this.value == '') {this.value = 'Username';}">
+        <input type="text" class="text" value="user.username" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Username';}" v-model="user.username">
         <div class="key">
-            <input type="password" :value="user.password" onfocus="this.value = '';"
-                   onblur="if (this.value == '') {this.value = 'Password';}">
+            <input type="password" value="user.password" onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Password';}" v-model="user.password">
         </div>
     </form>
     <div class="signin">
@@ -93,6 +93,7 @@
                         vm.$alert(res.data.message);
                     }
                     window.location.href = '${SITE_URL}main/'
+
                 }).catch( res => {
                     console.log(res);
                     vm.$alert('服务器错误！'+ res);
