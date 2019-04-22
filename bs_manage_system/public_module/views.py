@@ -1,10 +1,17 @@
 # encoding:utf-8
+import os
+import datetime
 from public_module.mymako import render_mako_context
 from public_module.mymako import render_json
 from public_module.public_tools import auth_skip
 from user_module.user_interface import UserLoinInterface
 import json
 from notices_module.notice_interface import NoticeInterface
+import uuid
+from public_module.public_tools import success_return
+from public_module.public_tools import error_return
+from accessories_module.accessories_interface import AccessoriesInterface
+from project_module.project_interface import ProjectInterface
 
 
 # Create your views here.
@@ -147,3 +154,90 @@ def apply_project_html(request):
     :return:
     """
     return render_mako_context(request, 'apply/apply_project.html')
+
+
+def upload_file_accessories(request):
+    """
+    上传附件
+    :param request:
+    :return:
+    """
+    file_name = request.FILES.get('file')
+    project_id = request.session['apply_project_id']
+    accessories_id = uuid.uuid1()
+    if not file_name:
+        # error
+        return render_json(error_return(u'文件不存在'))
+    else:
+        destination = open(os.path.join("static/upload", str(uuid.uuid1()) + file_name.name), 'wb+')
+        for chunk in file_name.chunks():
+            destination.write(chunk)
+        destination.close()
+        accessories_url = str(uuid.uuid1()) + file_name.name
+        res = AccessoriesInterface.insert_accessories(project_id=project_id, accessories_id=accessories_id,
+                                                      accessories_name=file_name.name, accessories_url=accessories_url)
+    return render_json(res)
+
+
+def get_accessories_by_project_id(request):
+    """
+    通过项目ID获取附件List 没有附件则返回空
+    :param request:
+    :return:
+    """
+    project_id = request.session['apply_project_id']
+    print project_id
+    res = AccessoriesInterface.get_accessories_by_project_id(project_id=project_id, page=0, page_size=0)
+    return render_json(res)
+
+
+def delete_accessories_by_accessories_id(request):
+    """
+    通过附加ID删除附件
+    :param request:
+    :return:
+    """
+
+    res = AccessoriesInterface.delete_accessories_by_accessories_id(accessories_id=2)
+    return render_json(res)
+
+
+def insert_accessories(request):
+    """
+    新增附件
+    :param request:
+    :return:
+    """
+    print request.body
+    json.loads(request.body)
+    # res = AccessoriesInterface.insert_accessories()
+    return render_json({})
+
+
+def insert_project(request):
+    """
+    新增项目
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    project_name = request_body.get('project_name')
+    research_content = request_body.get('research_content')
+    technology_new = request_body.get('technology_new')
+    expected_goal = request_body.get('expected_goal')
+    participator = request_body.get('participator')
+    start_time = request_body.get('start_time')
+    stop_time = request_body.get('stop_time')
+    apply_user_id = request.session['user_id']
+    apply_user_name = request.session['user'].get('username')
+    now_time = datetime.datetime.now()
+    res = ProjectInterface.insert_project(project_name=project_name, project_time=now_time,
+                                          research_content=research_content,
+                                          technology_new=technology_new, expected_goal=expected_goal,
+                                          participator=participator,
+                                          start_time=now_time, stop_time=now_time, apply_user_id=apply_user_id,
+                                          apply_user_name=apply_user_name)
+    if res.get('code') == 0:
+        request.session['apply_project_id'] = res.get('results').get('project_id')
+    print request.session['apply_project_id']
+    return render_json(res)

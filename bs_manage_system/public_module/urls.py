@@ -1,5 +1,7 @@
 # encoding:utf-8
 from django.conf.urls import patterns
+from django.contrib.staticfiles import views
+from bs_manage_system import settings
 
 urlpatterns = patterns(
     'public_module.views',
@@ -13,6 +15,11 @@ urlpatterns = patterns(
     (r'^get_notice_by_session/$', 'get_notice_by_session'),  # 通知公告新增
     (r'^get_user_login_by_id/$', 'get_user_login_by_id'),  # 通知公告新增
     (r'^apply_project_html/$', 'apply_project_html'),  # 通知公告新增
-
+    (r'^upload_file_accessories/$', 'upload_file_accessories'),  # 上传项目附件
+    (r'^get_accessories_by_project_id/$', 'get_accessories_by_project_id'),  # 通过项目ID获取附件列表
+    (r'^delete_accessories_by_accessories_id/$', 'delete_accessories_by_accessories_id'),  # 通过项目ID获取附件列表
+    (r'^insert_accessories/$', 'insert_accessories'),  # 通过项目ID获取附件列表
+    (r'^insert_project/$', 'insert_project'),  # 通过项目ID获取附件列表
+    (r'^static/upload/(?P<path>.*)$', views.serve, {'document_root': settings.STATIC_URL}),
     (r'^user_login/$', 'user_login'),  # 登陆
 )

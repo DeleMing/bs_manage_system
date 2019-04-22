@@ -68,8 +68,18 @@ class ReviewProject(models.Model):
 class Project(models.Model):
     """
     项目表(需要增加字段)
+    project_status 0:未提交 1：已提交 2：审批中 3：审批通过 4：审批驳回
     """
     project_id = models.CharField(max_length=64)
     project_name = models.CharField(max_length=32)
     project_time = models.DateTimeField(auto_now_add=True)
-    apply_user_name = models.CharField(max_length=32)
+    apply_user_name = models.CharField(max_length=32)  #
+    apply_user_id = models.CharField(max_length=64)
+    research_content = models.TextField()
+    technology_new = models.TextField()
+    expected_goal = models.TextField()
+    participator = models.TextField()
+    start_time = models.TimeField(auto_now_add=True)
+    stop_time = models.TimeField(auto_now_add=True)
+    project_status = models.IntegerField()
+
