@@ -2285,7 +2285,7 @@
             this.source = source;
             this.loaded = 0;
     
-            this.on( 'error', function( msg ) {
+            this.on( 'error', function(msg ) {
                 this.setStatus( WUFile.Status.ERROR, msg );
             });
         }
@@ -3636,7 +3636,7 @@
                 };
     
                 // 尝试重试，然后广播文件上传出错。
-                tr.on( 'error', function( type, flag ) {
+                tr.on( 'error', function(type, flag ) {
                     block.retried = block.retried || 0;
     
                     // 自动重试

@@ -63,7 +63,7 @@
                 <ul v-for = "i in notices_list">
 
                     <li>
-                        <a :href="'/detail_notice_html/?notification_id=' + i.notification_id" target="_blank">
+                        <a :href="'/detail_notice_html/?notification_id=' + i.notification_id">
                             <img src="${STATIC_URL}images/ico/news_incob.png" style="margin:10px 10px 2px 0px;">{{i.notification_title}}
                             <span style="float:right">{{i.create_time}}</span>
                         </a>

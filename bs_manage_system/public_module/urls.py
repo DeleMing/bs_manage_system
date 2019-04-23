@@ -35,5 +35,8 @@ urlpatterns = patterns(
     (r'^get_project_by_review/$', 'get_project_by_review'),
     (r'^detail_review_html/$', 'detail_review_html'),
     (r'^get_project_by_project_id/$', 'get_project_by_project_id'),
+    (r'^get_other_review_by_project_id/$', 'get_other_review_by_project_id'),
+    (r'^get_my_review_by_project_id/$', 'get_my_review_by_project_id'),
+    (r'^submit_my_review/$', 'submit_my_review'),
     (r'^user_login/$', 'user_login'),  # 登陆
 )

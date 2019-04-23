@@ -220,7 +220,6 @@
                     //this是当前创建的编辑器实例
                     vm.form.content = this.getContent();
                 });
-                alert(vm.form.content)
                 axios({
                     url: '${SITE_URL}insert_notice/',
                     data: vm.form,

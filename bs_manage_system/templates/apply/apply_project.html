@@ -129,12 +129,12 @@
 
     </div>
 
-    <div class="complete" v-if="complete_pane">
-        333
+    <div class="complete" v-if="complete_pane" style="text-align:center">
+        <img src="${STATIC_URL}images/ico/success.png" v-if="complete_pane">
+        <img src="${STATIC_URL}images/ico/error.png" v-else>
     </div>
     <div class="add_project_info">
         <el-button @click="next_step" v-if="next_step_button">下一步</el-button>
-        <el-button @click="" v-if="complete_pane">完成</el-button>
     </div>
 </div>
 <script>
@@ -180,7 +180,7 @@
                     vm.apply_project_form_table = true;
                 } else if (vm.active_pane === 2) {
                     //暂时注释
-                    //vm.apply_project();
+                    vm.apply_project();
                     vm.get_accessories();
                     vm.active_pane = 3;
                     vm.project_pane = false;
@@ -188,9 +188,10 @@
                 } else if (vm.active_pane === 3) {
                     vm.active_pane = 4;
                     vm.accessories_pane = false;
-                    vm.complete_pane = true;
+                    //vm.complete_pane = true;
                     vm.next_step_button = false;
                     vm.submit_project();
+                    vm.accessories_table = []
                 }
             },
             //预览表格
@@ -269,13 +270,14 @@
                 }).then( res => {
                     console.log(res)
                     if (res.data.code === 0){
-                        vm.$message(res.data.message)
+                        vm.$message(res.data.message);
+                        vm.complete_pane = true;
                     }else{
-                        vm.$message(res.data.message)
+                        vm.$message(res.data.message);
                     }
                 }).catch( res => {
                     console.log(res)
-                    vm.$message('请求服务器错误')
+                    vm.$message('请求服务器错误');
                 })
             },
         }

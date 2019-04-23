@@ -11291,11 +11291,11 @@
                 }, validate: function () {
                     if ("prompt" === this.$type) {
                         var e = this.inputPattern;
-                        if (e && !e.test(this.inputValue || "")) return this.editorErrorMessage = this.inputErrorMessage || (0, f.t)("el.messagebox.error"), (0, h.addClass)(this.getInputElement(), "invalid"), !1;
+                        if (e && !e.test(this.inputValue || "")) return this.editorErrorMessage = this.inputErrorMessage || (0, f.t)("error"), (0, h.addClass)(this.getInputElement(), "invalid"), !1;
                         var t = this.inputValidator;
                         if ("function" == typeof t) {
                             var i = t(this.inputValue);
-                            if (!1 === i) return this.editorErrorMessage = this.inputErrorMessage || (0, f.t)("el.messagebox.error"), (0, h.addClass)(this.getInputElement(), "invalid"), !1;
+                            if (!1 === i) return this.editorErrorMessage = this.inputErrorMessage || (0, f.t)("error"), (0, h.addClass)(this.getInputElement(), "invalid"), !1;
                             if ("string" == typeof i) return this.editorErrorMessage = i, (0, h.addClass)(this.getInputElement(), "invalid"), !1
                         }
                     }

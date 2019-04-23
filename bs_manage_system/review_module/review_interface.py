@@ -78,3 +78,17 @@ class ReviewInterface():
             i['review_time'] = i['review_time'].strftime("%Y-%m-%d %H:%M:%S")
             result_list.append(i)
         return success_return(u'获取评审信息列表成功', result_list)
+
+    @classmethod
+    def get_review_list_by_project_id(cls, project_id):
+        """
+        通过项目ID获取审批信息
+        :param project_id:
+        :return:
+        """
+        result_list = []
+        review = Review.objects.values().filter(project_id=project_id).order_by('-review_time')
+        for i in review:
+            i['review_time'] = i['review_time'].strftime("%Y-%m-%d %H:%M:%S")
+            result_list.append(i)
+        return success_return(u'获取评审信息列表成功', result_list)

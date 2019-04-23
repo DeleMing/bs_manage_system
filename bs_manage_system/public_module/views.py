@@ -249,6 +249,10 @@ def insert_project(request):
                                           participator=participator,
                                           start_time=now_time, stop_time=now_time, apply_user_id=apply_user_id,
                                           apply_user_name=apply_user_name)
+    try:
+        del request.session['apply_project_id']
+    except:
+        pass
     if res.get('code') == 0:
         request.session['apply_project_id'] = res.get('results').get('project_id')
     print request.session['apply_project_id']
@@ -444,6 +448,55 @@ def get_project_by_project_id(request):
     """
     project_id_list = []
     project_id = request.session['project_id']
+    print project_id
     project_id_list.append(project_id)
     res = ProjectInterface.get_project_by_project_id_list(project_id_list=project_id_list, page=0, page_size=0)
+    return render_json(res)
+
+
+def get_other_review_by_project_id(request):
+    """
+    通过项目ID获取评审信息
+    :param request:
+    :return:
+    """
+    project_id = request.session['project_id']
+    print project_id
+    res = ReviewInterface.get_review_list_by_project_id(project_id=project_id)
+    print res
+    user_id = request.session['user_id']
+    result_list = []
+    for i in res.get('results'):
+        if user_id != i.get('review_user_id'):
+            result_list.append(i)
+    return render_json(success_return(u'获取成功', result_list))
+
+
+def get_my_review_by_project_id(request):
+    """
+    获取个人审批意见
+    :param request:
+    :return:
+    """
+    project_id = request.session['project_id']
+    res = ReviewInterface.get_review_list_by_project_id(project_id=project_id)
+    user_id = request.session['user_id']
+    result_list = []
+    for i in res.get('results'):
+        if user_id == i.get('review_user_id'):
+            result_list.append(i)
+            return render_json(success_return(u'获取成功', result_list))
+
+
+def submit_my_review(request):
+    """
+    提交我的评审信息
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    review_id = request_body.get('review_id')
+    review_message = request_body.get('review_message')
+    review_status = request_body.get('review_status')
+    res = ReviewInterface.update_review(review_id=review_id, review_message=review_message, review_status=review_status)
     return render_json(res)

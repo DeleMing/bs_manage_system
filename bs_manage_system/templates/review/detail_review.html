@@ -50,19 +50,22 @@
                             <td>一、研发内容(100字以上，500字以内)</td>
                         </tr>
                         <tr>
-                            <td v-html="project_form.research_content" style="height: 300px">{{ project_form.research_content }}</td>
+                            <td v-html="project_form.research_content"
+                                style="height: 300px">{{ project_form.research_content }}</td>
                         </tr>
                         <tr>
                             <td>二、技术创新点(100字以上，500字以内)</td>
                         </tr>
                         <tr>
-                            <td v-html="project_form.technology_new" style="height: 300px">{{ project_form.technology_new }}</td>
+                            <td v-html="project_form.technology_new"
+                                style="height: 300px">{{ project_form.technology_new }}</td>
                         </tr>
                         <tr>
                             <td>三、预期目标(100字以上，500字以内)</td>
                         </tr>
                         <tr>
-                            <td v-html="project_form.expected_goal" style="height: 300px">{{ project_form.expected_goal }}</td>
+                            <td v-html="project_form.expected_goal"
+                                style="height: 300px">{{ project_form.expected_goal }}</td>
                         </tr>
                     </table>
                     <!--<el-button @click="print_table">打印</el-button>-->
@@ -76,18 +79,72 @@
 
                     <el-table-column prop="accessories_url" label="删除" width="150">
                         <template slot-scope="scope">
-                             <el-button @click="open_url(scope.row.accessories_url, scope.row.accessories_name)"
+                            <el-button @click="open_url(scope.row.accessories_url, scope.row.accessories_name)"
                                        type="text"
                                        size="small">下载
                             </el-button>
-
-
                         </template>
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
-            <el-tab-pane label="他人审批意见" name="third">角色管理</el-tab-pane>
-            <el-tab-pane label="我的审批意见" name="fourth">定时任务补偿</el-tab-pane>
+            <el-tab-pane label="他人审批意见" name="third">
+
+                <el-table :data="review_table" border style="width: 100%">
+                    <el-table-column prop="review_status" label="审批状态" width="180">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.review_status==0">未审批</span>
+                            <span v-if="scope.row.review_status==1">审批通过</span>
+                            <span v-if="scope.row.review_status==2">审批驳回</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="review_user_name" label="审批人" width="200">
+                    </el-table-column>
+                    <el-table-column prop="review_time" label="审批时间" width="200">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.review_status==0"></span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="review_message" label="审批意见">
+                    </el-table-column>
+
+                </el-table>
+
+            </el-tab-pane>
+            <el-tab-pane label="我的审批意见" name="fourth">
+                <el-table :data="my_review_table" border style="width: 100%">
+                    <el-table-column prop="review_status" label="审批状态" width="180">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.review_status==0">未审批</span>
+                            <span v-if="scope.row.review_status==1">审批通过</span>
+                            <span v-if="scope.row.review_status==2">审批驳回</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="review_user_name" label="审批人" width="200">
+                    </el-table-column>
+                    <el-table-column prop="review_time" label="审批时间" width="200">
+                        <template slot-scope="scope">
+                            <span v-if="scope.row.review_status==0"></span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="review_message" label="审批意见">
+                    </el-table-column>
+
+                </el-table>
+                <div v-if="is_can_review">
+                    <el-form :model="review_form" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                        <el-form-item label="特殊资源" prop="review_status">
+                            <el-radio-group v-model="review_form.review_status">
+                                <el-radio label="1">审批通过</el-radio>
+                                <el-radio label="2">审批驳回</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="审批意见" prop="desc">
+                            <el-input type="textarea" v-model="review_form.review_message"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <el-button type="primary" @click="submit_review">立即审批</el-button>
+                </div>
+            </el-tab-pane>
         </el-tabs>
     </template>
 
@@ -108,8 +165,17 @@
             },
             accessories_table: [],
             activeName: 'first',
+            review_table: [],
+            my_review_table: [],
+            is_can_review: false,
+            review_form: {
+                review_id:'',
+                review_status: '',
+                review_message:'',
+            },
         },
         methods: {
+            //获取申报表
             get_project() {
                 axios({
                     url: '/get_project_by_project_id/',
@@ -139,10 +205,60 @@
             open_url(value, accessories_name) {
                 window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
             },
+            //获取他人审批意见
+            get_other_review() {
+                axios({
+                    url: '/get_other_review_by_project_id/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.review_table = res.data.results;
+                        if (res.data.results[0].review_status === 0) {
+                            vm.is_can_review = true;
+                        }
+                    }
+                }).catch(res => {
+                    console.log(res)
+                })
+            },
+            handleClick(tab, event) {
+                console.log(tab, event);
+            },
+            //获取个人审批意见
+            get_my_review() {
+                axios({
+                    url: '/get_my_review_by_project_id/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.my_review_table = res.data.results;
+                        vm.review_form.review_id = res.data.results[0].review_id;
+                    }
+                }).catch(res => {
+                    console.log(res);
+                })
+            },
+            //提交审批意见
+            submit_review(){
+                console.log(vm.review_form);
+                axios({
+                    url:'/submit_my_review/',
+                    data:vm.review_form,
+                    method:'post'
+                }).then( res => {
+                    console.log(res);
+                }).catch( res => {
+                    console.log(res);
+                })
+                vm.get_my_review();
+                vm.is_can_review = false;
+            },
         }
     });
     vm.get_project();
     vm.get_accessories();
+    vm.get_other_review();
+    vm.get_my_review();
 </script>
 </body>
 </html>
