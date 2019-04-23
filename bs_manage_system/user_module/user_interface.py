@@ -52,3 +52,35 @@ class UserLoinInterface():
             return success_return(u'获取用户登录信息成功', query_result)
         except Exception as e:
             return error_return(u'获取用户登录信息失败')
+
+    @classmethod
+    def get_user_list_by_type(cls, user_type):
+        """
+
+        :param user_type:
+        :return:
+        """
+        result_list = []
+        try:
+            user_login = UserLogin.objects.values().filter(user_type=user_type)
+            for i in user_login:
+                result_list.append(i)
+        except:
+            pass
+        return success_return(u'获取用户列表成功', result_list)
+
+    @classmethod
+    def get_user_list_by_name_list(cls, user_name_list):
+        """
+        通过用户名列表获取用户列表
+        :param user_name_list:
+        :return:
+        """
+        result_list = []
+        try:
+            user_login = UserLogin.objects.values().filter(user_name__in=user_name_list)
+            for i in user_login:
+                result_list.append(i)
+        except:
+            pass
+        return success_return(u'获取用户列表成功', result_list)

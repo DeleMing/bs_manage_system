@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目详情</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <!--阿里巴巴矢量图标库--项目完成后请下载css并下载css引用的字体文件-->
+    <link href="http://at.alicdn.com/t/font_997278_ptr5bdmor4j.css" rel="stylesheet">
+    <style>
+        .add_project_info {
+            width: 70%;
+            padding-left: 15%;
+        }
+
+        .table, .table tr th, .table tr td {
+            border: 1px solid #000000;
+        }
+
+        .table {
+            width: 100%;
+            min-height: 25px;
+            border-collapse: collapse;
+        }
+
+        .add_accessories {
+            width: 70%;
+            padding-left: 15%;
+        }
+    </style>
+</head>
+<body>
+<div id="vue">
+    <h2>项目：{{ project_form.project_name }}的审批信息</h2>
+    <template>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="项目申报文件" name="first">
+                <div style="border:1px dashed #000" id="apply_table">
+                    <h1 style="text-align: center">{{ project_form.project_name }}</h1>
+                    <table style="border: 1px solid #ffffff" class="table">
+                        <tr>
+                            <td>一、研发内容(100字以上，500字以内)</td>
+                        </tr>
+                        <tr>
+                            <td v-html="project_form.research_content" style="height: 300px">{{ project_form.research_content }}</td>
+                        </tr>
+                        <tr>
+                            <td>二、技术创新点(100字以上，500字以内)</td>
+                        </tr>
+                        <tr>
+                            <td v-html="project_form.technology_new" style="height: 300px">{{ project_form.technology_new }}</td>
+                        </tr>
+                        <tr>
+                            <td>三、预期目标(100字以上，500字以内)</td>
+                        </tr>
+                        <tr>
+                            <td v-html="project_form.expected_goal" style="height: 300px">{{ project_form.expected_goal }}</td>
+                        </tr>
+                    </table>
+                    <!--<el-button @click="print_table">打印</el-button>-->
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="项目附件" name="second">
+                <el-table :data="accessories_table" style="width: 100%">
+                    <el-table-column prop="accessories_name" label="附件名称" width="800">
+
+                    </el-table-column>
+
+                    <el-table-column prop="accessories_url" label="删除" width="150">
+                        <template slot-scope="scope">
+                             <el-button @click="open_url(scope.row.accessories_url, scope.row.accessories_name)"
+                                       type="text"
+                                       size="small">下载
+                            </el-button>
+
+
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="他人审批意见" name="third">角色管理</el-tab-pane>
+            <el-tab-pane label="我的审批意见" name="fourth">定时任务补偿</el-tab-pane>
+        </el-tabs>
+    </template>
+
+
+</div>
+<script>
+    let vm = new Vue({
+        el: '#vue',
+        data: {
+            project_form: {
+                project_name: '',
+                research_content: '',
+                technology_new: '',
+                expected_goal: '',
+                participator: '',
+                start_time: '',
+                stop_time: '',
+            },
+            accessories_table: [],
+            activeName: 'first',
+        },
+        methods: {
+            get_project() {
+                axios({
+                    url: '/get_project_by_project_id/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.project_form = res.data.results[0];
+                    }
+                }).catch(res => {
+                    console.log(res);
+                })
+            },
+            //获取附件列表
+            get_accessories() {
+                axios({
+                    url: '/get_accessories_by_project_id/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.accessories_table = res.data.results;
+                    }
+                }).catch(res => {
+                    console.log(res);
+                })
+            },
+            //打开附件
+            open_url(value, accessories_name) {
+                window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
+            },
+        }
+    });
+    vm.get_project();
+    vm.get_accessories();
+</script>
+</body>
+</html>

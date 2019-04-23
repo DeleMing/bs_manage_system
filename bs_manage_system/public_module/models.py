@@ -50,6 +50,7 @@ class Review(models.Model):
     审批信息表
     """
     review_id = models.CharField(max_length=64)
+    project_id = models.CharField(max_length=64)
     review_user_id = models.CharField(max_length=64)
     review_status = models.IntegerField()
     review_message = models.CharField(max_length=255)
@@ -62,7 +63,7 @@ class ReviewProject(models.Model):
     项目与评审信息关系表
     """
     project_id = models.CharField(max_length=64)
-    review_di = models.CharField(max_length=64)
+    review_id = models.CharField(max_length=64)
 
 
 class Project(models.Model):

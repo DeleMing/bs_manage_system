@@ -15,6 +15,7 @@ from public_module.public_tools import success_return
 from public_module.public_tools import error_return
 from accessories_module.accessories_interface import AccessoriesInterface
 from project_module.project_interface import ProjectInterface
+from review_module.review_interface import ReviewInterface
 
 
 # Create your views here.
@@ -116,6 +117,8 @@ def user_login(request):
     if temp_result.get('code') == 0:
         try:
             del request.session['user']
+            del request.session['user_type']
+            del request.session['user_id']
             print request.session.get('user')
         except:
             pass
@@ -191,7 +194,10 @@ def get_accessories_by_project_id(request):
     :param request:
     :return:
     """
-    project_id = request.session['apply_project_id']
+    try:
+        project_id = request.session['apply_project_id']
+    except:
+        project_id = request.session['project_id']
     print project_id
     res = AccessoriesInterface.get_accessories_by_project_id(project_id=project_id, page=0, page_size=0)
     return render_json(res)
@@ -273,4 +279,171 @@ def submit_project(request):
     :param request:
     :return:
     """
-    return render_json({})
+    project_id = request.session['apply_project_id']
+    res = ProjectInterface.change_project_status(project_id=project_id, project_status=1)
+    if res.get('code') == 0:
+        res['message'] = u'提交项目成功'
+    else:
+        res['message'] = u'提交项目失败'
+    return render_json(res)
+
+
+def my_apply_html(request):
+    """
+    我的申请页面HTML
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'apply/my_apply.html')
+
+
+def my_apply(request):
+    """
+    获取我的申请
+    :param request:
+    :return:
+    """
+    user_id = request.session['user_id']
+    print user_id
+    res = ProjectInterface.get_project_by_user_id(apply_user_id=user_id, page=0, page_size=2)
+    return render_json(res)
+
+
+def get_user_list_by_type(request):
+    """
+    通过用户类型获取用户列表
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    user_type = request_body.get('user_type')
+    # user_type = 2
+    res = UserLoinInterface.get_user_list_by_type(user_type=user_type)
+    return render_json(res)
+
+
+def get_accessories_list_project_id(request):
+    """
+    通过项目id获取附件列表(非session)
+    :param request:
+    :return:
+    """
+    project_id = request.GET.get('project_id')
+    res = AccessoriesInterface.get_accessories_by_project_id(project_id=project_id, page=0, page_size=0)
+    return render_json(res)
+
+
+def my_review_html(request):
+    """
+    需要我审批的页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'review/my_review.html')
+
+
+def get_username_by_session(request):
+    """
+    通过session获取用户名
+    :param request:
+    :return:
+    """
+    try:
+        username = request.session.get('user')['username']
+        res = success_return(u'获取用户名成功', {'username': username})
+    except Exception as e:
+        res = error_return(u'获取用户名失败')
+    return render_json(res)
+
+
+def get_project_by_status(request):
+    """
+    通过项目状态获取项目列表
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    project_status = request_body.get('project_status')
+    res = ProjectInterface.get_project_by_status(project_status=project_status, page=0, page_size=0)
+    return render_json(res)
+
+
+def project_to_review_html(request):
+    """
+    设置评审专家页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'review/project_to_review.html')
+
+
+def submit_review(request):
+    """
+    设置评审专家
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    project_id = request_body.get('project_id')
+    user_name_list = request_body.get('review_list')
+    review_id = uuid.uuid1()
+    user_list = UserLoinInterface.get_user_list_by_name_list(user_name_list).get('results')
+    temp = ProjectInterface.change_project_status(project_id=project_id, project_status=2)
+    for i in user_list:
+        init_review_res = ReviewInterface.init_review(review_id=review_id, review_user_id=i.get('user_id'),
+                                                      review_user_name=i.get('user_name'), project_id=project_id)
+        if init_review_res.get('code') == 0:
+            res = success_return(u'设置评审专家成功', None)
+            continue
+        else:
+            ReviewInterface.delete_review(review_id=review_id)
+            ProjectInterface.change_project_status(project_id=project_id, project_status=1)
+            res = success_return(u'设置评审专家失败', None)
+            return render_json(res)
+    return render_json(res)
+
+
+def get_project_by_review(request):
+    """
+    通过评审专家用户ID获取需要审批的项目List
+    :param request:
+    :return:
+    """
+    user_id = request.session['user_id']
+    res = ReviewInterface.get_review_list_by_user_id(review_user_id=user_id)
+    project_id_list = []
+    for i in res.get('results'):
+        project_id = i.get('project_id')
+        project_id_list.append(project_id)
+    project_id_list = list(set(project_id_list))
+    print project_id_list
+    res = ProjectInterface.get_project_by_project_id_list(project_id_list=project_id_list, page=0, page_size=10)
+    return render_json(res)
+
+
+def detail_review_html(request):
+    """
+    跳转到审批详情页, 并设置session
+    :param request:
+    :return:
+    """
+    try:
+        del request.session['project_id']
+    except:
+        pass
+    project_id = request.GET.get('project_id')
+    request.session['project_id'] = project_id
+    return render_mako_context(request, 'review/detail_review.html')
+
+
+def get_project_by_project_id(request):
+    """
+    通过项目ID获取项目信息
+    :param request:
+    :return:
+    """
+    project_id_list = []
+    project_id = request.session['project_id']
+    project_id_list.append(project_id)
+    res = ProjectInterface.get_project_by_project_id_list(project_id_list=project_id_list, page=0, page_size=0)
+    return render_json(res)

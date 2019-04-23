@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>给项目分配评审专家</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+
+    <!--阿里巴巴矢量图标库--项目完成后请下载css并下载css引用的字体文件-->
+    <link href="http://at.alicdn.com/t/font_997278_ptr5bdmor4j.css" rel="stylesheet">
+</head>
+<body>
+<h2>设置评审专家</h2>
+<div id="vue">
+    <el-table :data="project_table" border style="width: 100%">
+        <el-table-column prop="project_name" label="项目名称" width="400">
+        </el-table-column>
+        <el-table-column prop="project_status" label="审批状态" width="180">
+            <template slot-scope="scope">
+                <span v-if="scope.row.project_status===0">未提交</span>
+                <span v-if="scope.row.project_status===1">已提交</span>
+                <span v-if="scope.row.project_status===2">审批中</span>
+                <span v-if="scope.row.project_status===3">审批通过</span>
+                <span v-if="scope.row.project_status===3">审批驳回</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="project_time" label="申请时间" width="200">
+        </el-table-column>
+        <el-table-column prop="apply_user_name" label="申请人" width="200">
+        </el-table-column>
+        <el-table-column label="附件">
+            <template slot-scope="scope">
+                <el-button-group v-for="(i,index) in scope.row.accessories_list" :key="index">
+                    <a style="text-decoration:none"
+                       :href="'${SITE_URL}download_static/?accessories_url='+i.accessories_url+'&accessories_name='+i.accessories_name">
+                        附件{{ index+1}}:{{ i.accessories_name }}&nbsp;<br></a>
+                </el-button-group>
+            </template>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button @click="open_dialog(scope.row.project_id, scope.row.project_name)" type="primary">设置评审专家</el-button>
+            </template>
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+        <span>
+            <el-form ref="form" :model="form" label-width="100px">
+                <el-form-item label="选择评审专家">
+                    <el-select
+                            v-model="value9"
+                            multiple
+                            filterable
+                            remote
+                            reserve-keyword
+                            placeholder="请输入名称"
+                            :remote-method="remoteMethod"
+                            :loading="loading" size="medium">
+                        <el-option
+                                v-for="item in options4"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value" width="300px">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+        </span>
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submit_review">确 定</el-button>
+        </span>
+    </el-dialog>
+
+</div>
+
+<script>
+    let vm = new Vue({
+        el: '#vue',
+        data: {
+            project_table: [],
+            options4: [],
+            value9: [],
+            list: [],
+            states: [],
+            loading: false,
+            form: {
+                project_id:'',
+                review_list:[],
+            },
+            dialogVisible: false,
+            dialogTitle:'',
+        },
+        methods: {
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_=> {
+                    });
+            },
+            async get_my_apply_project() {
+                let res = await axios({
+                    url: '/get_project_by_status/',
+                    method: 'post',
+                    data: {project_status: 1}
+                });
+                if (res.data.code === 0) {
+                    for (let i = 0; i < res.data.results.length; i++) {
+                        /***let temp = vm.get_accessories(res.data.results[i].project_id);
+                         console.log(temp)
+                         console.log(vm.accessories_list);***/
+                        let resp = await axios({
+                            url: '/get_accessories_list_project_id/?project_id=' + res.data.results[i].project_id,
+                        });
+                        if (resp.data.code === 0) {
+                            res.data.results[i].accessories_list = resp.data.results;
+                        }
+
+                    }
+                    vm.project_table = res.data.results;
+                    console.log(vm.project_table)
+                } else {
+                    vm.$message(res.data.message);
+                }
+
+            },
+            //打开附件
+            open_url(value, accessories_name) {
+                window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
+            },
+            //获取评审专家列表
+            get_review_list() {
+                axios({
+                    url: '/get_user_list_by_type/',
+                    method: 'post',
+                    data: {user_type: 2}
+                }).then((res) => {
+                    console.log(res)
+                    for (let i = 0; i < res.data.results.length; i++) {
+                        vm.states.push(res.data.results[i].user_name);
+                    }
+                    this.list = this.states.map(item => {
+                        return {value: item, label: item};
+                    });
+                }).catch((res) => {
+                    console.log(res)
+                })
+            },
+            //remoteMethod
+            remoteMethod(query) {
+                if (query !== '') {
+                    this.loading = true;
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.options4 = this.list.filter(item => {
+                            return item.label.toLowerCase()
+                                .indexOf(query.toLowerCase()) > -1;
+                        });
+                    }, 200);
+                } else {
+                    this.options4 = [];
+                }
+            },
+            //打开设置评审专家页面
+            open_dialog(project_id, project_name){
+                vm.dialogVisible = true;
+                vm.dialogTitle = '给项目：'+ project_name +'选择评审专家';
+                vm.form.project_id = project_id;
+            },
+            //提交审批专家
+            submit_review(){
+                vm.form.review_list = vm.value9;
+                console.log(vm.form);
+                axios({
+                    url:'/submit_review/',
+                    method:'post',
+                    data:vm.form,
+                }).then( res => {
+                    console.log(res);
+                }).catch( res => {
+                    console.log(res);
+                })
+                vm.dialogVisible = false;
+            },
+
+        }
+    });
+    vm.get_my_apply_project();
+    vm.get_review_list();
+</script>
+</body>
+</html>

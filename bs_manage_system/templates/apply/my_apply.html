@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的项目申请</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+</head>
+<body>
+
+<div id="vue">
+    <h2>我申报的项目</h2>
+    <el-table :data="project_table" border style="width: 100%">
+        <el-table-column prop="project_name" label="项目名称" width="400">
+        </el-table-column>
+        <el-table-column prop="project_status" label="审批状态" width="180">
+            <template slot-scope="scope">
+                <span v-if="scope.row.project_status===0">未提交</span>
+                <span v-if="scope.row.project_status===1">已提交</span>
+                <span v-if="scope.row.project_status===2">审批中</span>
+                <span v-if="scope.row.project_status===3">审批通过</span>
+                <span v-if="scope.row.project_status===3">审批驳回</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="project_time" label="申请时间" width="200">
+        </el-table-column>
+        <el-table-column prop="apply_user_name" label="申请人" width="200">
+        </el-table-column>
+        <el-table-column label="附件" >
+            <template slot-scope="scope">
+                <el-button-group v-for="(i,index) in scope.row.accessories_list" :key="index">
+                    <a style="text-decoration:none" :href="'${SITE_URL}download_static/?accessories_url='+i.accessories_url+'&accessories_name='+i.accessories_name">
+                        附件{{index+1}}:{{ i.accessories_name }}&nbsp;<br></a>
+                </el-button-group>
+            </template>
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+<script>
+    let vm = new Vue({
+        el: '#vue',
+        data: {
+            project_table: [],
+        },
+        methods: {
+            async get_my_apply_project() {
+                let res =await axios({
+                    url: '/my_apply/',
+                });
+                    if (res.data.code === 0) {
+                        for (let i = 0; i < res.data.results.length; i++) {
+                            /***let temp = vm.get_accessories(res.data.results[i].project_id);
+                             console.log(temp)
+                             console.log(vm.accessories_list);***/
+                            let resp=await axios({
+                                url: '/get_accessories_list_project_id/?project_id=' + res.data.results[i].project_id,
+                            });
+                                if (resp.data.code === 0) {
+                                    res.data.results[i].accessories_list = resp.data.results;
+                                }
+
+                        }
+                        vm.project_table = res.data.results;
+                        console.log(vm.project_table)
+                    } else {
+                        vm.$message(res.data.message);
+                    }
+
+            },
+            //打开附件
+            open_url(value, accessories_name) {
+                window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
+            },
+        }
+    });
+    vm.get_my_apply_project();
+</script>
+</body>
+</html>

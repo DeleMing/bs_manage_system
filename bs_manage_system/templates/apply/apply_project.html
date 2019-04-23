@@ -190,6 +190,7 @@
                     vm.accessories_pane = false;
                     vm.complete_pane = true;
                     vm.next_step_button = false;
+                    vm.submit_project();
                 }
             },
             //预览表格
@@ -260,7 +261,23 @@
             //打开附件
             open_url(value, accessories_name) {
                 window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
-            }
+            },
+            //提交项目
+            submit_project(){
+                axios({
+                    url:'/submit_project/'
+                }).then( res => {
+                    console.log(res)
+                    if (res.data.code === 0){
+                        vm.$message(res.data.message)
+                    }else{
+                        vm.$message(res.data.message)
+                    }
+                }).catch( res => {
+                    console.log(res)
+                    vm.$message('请求服务器错误')
+                })
+            },
         }
     })
 </script>

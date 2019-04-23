@@ -1,4 +1,5 @@
 # encoding:utf-8
+from django.core.paginator import Paginator
 from django.db import transaction
 from public_module.models import Project
 from public_module.public_tools import success_return
@@ -59,17 +60,116 @@ class ProjectInterface():
             return error_return(u'修改项目状态失败')
 
     @classmethod
-    def get_project_by_id(cls):
-        pass
+    def get_project_by_user_id(cls, apply_user_id, page, page_size):
+        """
+        通过用户ID获取项目列表(List)
+        :param apply_user_id:
+        :param page:
+        :param page_size:
+        :return:
+        """
+        result_list = []
+        if page == 0:
+
+            try:
+                project = Project.objects.values().filter(apply_user_id=apply_user_id).order_by('-project_time')
+                for i in project:
+                    i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                    i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                    i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                    result_list.append(i)
+            except:
+                pass
+        else:
+            project = Project.objects.values().filter(apply_user_id=apply_user_id).order_by('-project_time')
+            paginator = Paginator(project, page_size)
+            temp_list = paginator.page(page)
+            for i in temp_list:
+                i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                i['page'] = page
+                i['page_count'] = paginator.num_pages
+                i['count'] = paginator.count
+                result_list.append(i)
+        return success_return('获取申请成功', result_list)
 
     @classmethod
-    def get_project_by_status(cls):
+    def get_project_by_status(cls, project_status, page, page_size):
+        """
+        通过项目状态获取项目列表
+        :param project_status:
+        :param page:
+        :param page_size:
+        :return:
+        """
+        result_list = []
+        if page == 0:
+
+            try:
+                project = Project.objects.values().filter(project_status=project_status).order_by('-project_time')
+                for i in project:
+                    i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                    i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                    i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                    result_list.append(i)
+            except:
+                pass
+        else:
+            project = Project.objects.values().filter(project_status=project_status).order_by('-project_time')
+            paginator = Paginator(project, page_size)
+            temp_list = paginator.page(page)
+            for i in temp_list:
+                i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                i['page'] = page
+                i['page_count'] = paginator.num_pages
+                i['count'] = paginator.count
+                result_list.append(i)
+        return success_return(u'获取申请成功', result_list)
+
+    @classmethod
+    def get_project_by_project_id_list(cls, project_id_list, page, page_size):
+        """
+
+        :param project_id_list:
+        :param page:
+        :param page_size:
+        :return:
+        """
+        result_list = []
+        if page == 0:
+
+            try:
+                project = Project.objects.values().filter(project_id__in=project_id_list).order_by('-project_time')
+                for i in project:
+                    i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                    i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                    i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                    result_list.append(i)
+            except:
+                pass
+        else:
+            project = Project.objects.values().filter(project_status=project_status).order_by('-project_time')
+            paginator = Paginator(project, page_size)
+            temp_list = paginator.page(page)
+            for i in temp_list:
+                i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+                i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+                i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+                i['page'] = page
+                i['page_count'] = paginator.num_pages
+                i['count'] = paginator.count
+                result_list.append(i)
+        return success_return(u'获取申请成功', result_list)
+
+    @classmethod
+    def get_project_by_id(cls):
         pass
 
     @classmethod
     def get_project_by_id_status(cls):
         pass
 
-    @classmethod
-    def get_project_by_user_id(cls):
-        pass
+

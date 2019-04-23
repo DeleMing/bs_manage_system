@@ -40,7 +40,7 @@
                     <span slot="title" style="width: 200px">科研项目申报</span>
                 </el-menu-item>
 
-                <el-menu-item index="3" style="height: 44px;line-height: 44px;" v-on:click="change_html('html5')">
+                <el-menu-item index="3" style="height: 44px;line-height: 44px;" v-on:click="change_html('html2')">
                     <i class="iconfont icon-changjingguanli"></i>
                     <span slot="title">我的申请</span>
                 </el-menu-item>
@@ -106,10 +106,10 @@
             <!--start right body-->
             <el-main>
                 <iframe v-if="ifArr.html1" class="ifa" scrolling=auto
-                                src="/add_project"
+                                src="/apply_project_html"
                                 frameborder="0" height="1000px;"></iframe>
                 <iframe v-if="ifArr.html2" class="ifa" scrolling=auto
-                                src="/department_setting"
+                                src="/my_apply_html"
                                 frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html3" class="ifa" scrolling=auto
                                 src="/project_type_setting"
@@ -198,7 +198,7 @@
             },
             get_session(){
                 axios({
-                    url:'/user_manage/get_session/'
+                    url:'/get_username_by_session/'
                 }).then( (res) => {
                     console.log(res);
                     if (res.data.code == 0){

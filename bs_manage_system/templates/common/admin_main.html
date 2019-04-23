@@ -51,7 +51,7 @@
 
                 <el-menu-item index="1" style="height: 44px;line-height: 44px;" v-on:click="change_html('html4')">
                     <i class="iconfont icon-changjingguanli"></i>
-                    <span slot="title">需要我审批的</span>
+                    <span slot="title">给项目分配给评审专家</span>
                 </el-menu-item>
 
                 <el-submenu index="5">
@@ -113,7 +113,7 @@
                                 src="/project_type_setting"
                                 frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html4" class="ifa" scrolling=auto
-                                src="/user_setting"
+                                src="/project_to_review_html"
                                 frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html5" class="ifa" scrolling=auto
                                 src="/my_apply"
@@ -190,7 +190,7 @@
             },
             get_session(){
                 axios({
-                    url:'/user_manage/get_session/'
+                    url:'/get_username_by_session/'
                 }).then( (res) => {
                     console.log(res);
                     if (res.data.code == 0){
