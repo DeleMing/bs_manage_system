@@ -108,8 +108,9 @@
 
             <el-table-column prop="accessories_url" label="删除" width="150">
                 <template slot-scope="scope">
-                    <el-button @click="delete_accessories(scope.row.accessories_id)" type="text" size="small">删除</el-button>
-                    <el-button @click="open_url(scope.row.accessories_url)" type="text" size="small">下载</el-button>
+                    <el-button @click="delete_accessories(scope.row.accessories_id)" type="text" size="small">删除
+                    </el-button>
+                    <el-button @click="open_url(scope.row.accessories_url, scope.row.accessories_name)" type="text" size="small">下载</el-button>
 
 
                 </template>
@@ -257,8 +258,8 @@
                 })
             },
             //打开附件
-            open_url(value) {
-                window.location.href = '${STATIC_URL}upload/' + value
+            open_url(value, accessories_name) {
+                window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
             }
         }
     })

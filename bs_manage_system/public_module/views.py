@@ -1,6 +1,9 @@
 # encoding:utf-8
 import os
 import datetime
+
+from django.http import HttpResponse
+from bs_manage_system.settings import STATIC_URL
 from public_module.mymako import render_mako_context
 from public_module.mymako import render_json
 from public_module.public_tools import auth_skip
@@ -169,11 +172,14 @@ def upload_file_accessories(request):
         # error
         return render_json(error_return(u'文件不存在'))
     else:
-        destination = open(os.path.join("static/upload", str(uuid.uuid1()) + file_name.name), 'wb+')
+        print type(file_name.name)
+        destination = open(
+            os.path.join("static/upload", str(accessories_id) + '.' + file_name.name.encode('utf-8').split('.')[-1]),
+            'wb+')
         for chunk in file_name.chunks():
             destination.write(chunk)
         destination.close()
-        accessories_url = str(uuid.uuid1()) + file_name.name
+        accessories_url = str(accessories_id) + '.' + file_name.name.encode('utf-8').split('.')[-1]
         res = AccessoriesInterface.insert_accessories(project_id=project_id, accessories_id=accessories_id,
                                                       accessories_name=file_name.name, accessories_url=accessories_url)
     return render_json(res)
@@ -241,3 +247,30 @@ def insert_project(request):
         request.session['apply_project_id'] = res.get('results').get('project_id')
     print request.session['apply_project_id']
     return render_json(res)
+
+
+def download_static(request):
+    """
+    下载资源
+    :param request:
+    :return:
+    """
+    file_url = request.GET.get('accessories_url')
+    file_name = request.GET.get('accessories_name')
+    print file_name.encode('utf-8')
+    url = "static/upload/" + str(file_url)
+    with open(url, 'rb') as code:
+        response = HttpResponse(code)
+        code.close()
+    response['Content-Type'] = 'application/octet-stream'  # 设置头信息，告诉浏览器这是个文件
+    response['Content-Disposition'] = 'attachment;filename="' + file_name.encode('utf-8')
+    return response
+
+
+def submit_project(request):
+    """
+    提交项目
+    :param request:
+    :return:
+    """
+    return render_json({})

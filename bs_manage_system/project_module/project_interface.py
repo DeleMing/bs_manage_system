@@ -44,6 +44,21 @@ class ProjectInterface():
             return error_return(u'新增项目失败' + str(e))
 
     @classmethod
+    def change_project_status(cls, project_id, project_status):
+        """
+        更改项目状态
+        :param project_id:
+        :param project_status:
+        :return:
+        """
+        try:
+            with transaction.atomic():
+                Project.objects.filter(project_id=project_id).update(project_status=project_status)
+            return success_return(u'修改状态成功', None)
+        except Exception as e:
+            return error_return(u'修改项目状态失败')
+
+    @classmethod
     def get_project_by_id(cls):
         pass
 

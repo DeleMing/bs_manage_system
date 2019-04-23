@@ -21,5 +21,6 @@ urlpatterns = patterns(
     (r'^insert_accessories/$', 'insert_accessories'),  # 通过项目ID获取附件列表
     (r'^insert_project/$', 'insert_project'),  # 通过项目ID获取附件列表
     (r'^static/upload/(?P<path>.*)$', views.serve, {'document_root': settings.STATIC_URL}),
+    (r'^download_static/$', 'download_static'),
     (r'^user_login/$', 'user_login'),  # 登陆
 )
