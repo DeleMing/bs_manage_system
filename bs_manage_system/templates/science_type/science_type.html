@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>科研类型管理</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <style>
+        a:hover {
+            color: #283593;
+            text-decoration: none
+        }
+
+        a {
+            color: #283593;
+            text-decoration: none
+        }
+
+        .el-table-add-row {
+            margin-top: 10px;
+            width: 100%;
+            height: 34px;
+            border: 1px dashed #c1c1cd;
+            border-radius: 3px;
+            cursor: pointer;
+            justify-content: center;
+            display: flex;
+            line-height: 34px;
+        }
+    </style>
+</head>
+<body>
+<h2>科研类型管理</h2>
+<div id="app">
+    <el-button @click="new_type" type="success" style="float: right; margin: 20px;">
+                                新增
+    </el-button>
+    <!--start table-->
+    <el-table :data="science_type" border >
+        <el-table-column type="index"></el-table-column>
+        <el-table-column prop="type_name" label="科研类型名称">
+        </el-table-column>
+        <el-table-column label="操作" width="200" prop="type_id">
+            <template slot-scope="scope">
+                <span class="el-tag  el-tag--mini" style="cursor: pointer;"
+                      @click="updateDialog(scope.row.type_id, scope.row.type_name)">
+                                编辑
+                </span>
+            </template>
+        </el-table-column>
+    </el-table>
+    <!--end table-->
+    <el-dialog title="请输入科研类型" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+            <el-form-item label="科研名称">
+                <el-input v-model="form.type_name" autocomplete="off"></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="closeDialog">取 消</el-button>
+            <el-button type="primary" @click="submit_form">确 定</el-button>
+        </div>
+    </el-dialog>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            dialogFormVisible:false,
+            science_type:[],
+            form:{
+                type_id:'',
+                type_name:'',
+            }
+        },
+        methods:{
+            //获取所有
+            get_all_science_type(){
+                axios({
+                    url:'/get_all_science_type/'
+                }).then( res => {
+                    console.log(res);
+                    if (res.data.code === 0){
+                        vm.science_type = res.data.results;
+                    }else {
+                        vm.$message.error(res.data.message);
+                    }
+                }).catch( res =>{
+                    console.log(res);
+                    vm.$message.error('请求服务器错误');
+                })
+            },
+            //新增打开dialog
+            new_type(){
+                vm.dialogFormVisible = true;
+            },
+            //关闭dialog
+            closeDialog(){
+                vm.form.type_id = '';
+                vm.form.type_name = '';
+                vm.dialogFormVisible = false;
+            },
+            //修改打开dialog
+            updateDialog(type_id, type_name){
+                vm.form.type_id = type_id;
+                vm.form.type_name = type_name;
+                vm.dialogFormVisible = true;
+            },
+            submit_form(){
+                if (vm.form.type_id == ''){
+                    //新增
+                    console.log('新增');
+                    axios({
+                        url:'/add_science_type/',
+                        method:'post',
+                        data:vm.form,
+                    }).then( res => {
+                        console.log(res);
+                        vm.$message.success(res.data.message);
+                        vm.closeDialog();
+                        vm.get_all_science_type();
+                    }).catch( res => {
+                        console.log(res);
+                        vm.$message.error('服务器错误')
+                    })
+                }else{
+                    //修改
+                    console.log('修改');
+                    axios({
+                        url:'/update_science_type/',
+                        method:'post',
+                        data:vm.form,
+                    }).then( res => {
+                        console.log(res);
+                        vm.$message.success(res.data.message);
+                        vm.closeDialog();
+                        vm.get_all_science_type();
+                    }).catch( res => {
+                        console.log(res);
+                        vm.$message.error('服务器错误')
+                    })
+                }
+
+            }
+        }
+    });
+    vm.get_all_science_type();
+</script>
+</body>
+</html>

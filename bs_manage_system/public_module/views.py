@@ -16,6 +16,8 @@ from public_module.public_tools import error_return
 from accessories_module.accessories_interface import AccessoriesInterface
 from project_module.project_interface import ProjectInterface
 from review_module.review_interface import ReviewInterface
+from user_module.user_interface import UserInfoInterface
+from science_type_module.science_type_interface import ScienceTypeInterface
 
 
 # Create your views here.
@@ -499,4 +501,163 @@ def submit_my_review(request):
     review_message = request_body.get('review_message')
     review_status = request_body.get('review_status')
     res = ReviewInterface.update_review(review_id=review_id, review_message=review_message, review_status=review_status)
+    return render_json(res)
+
+
+def detail_user_list_html(request):
+    """
+    用户管理页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'user/detail_user_list.html')
+
+
+def get_user_login_list(request):
+    """
+    获取用户登录列表
+    :param request:
+    :return:
+    """
+    res = UserLoinInterface.get_user_login_list(page=0, page_size=0)
+    return render_json(res)
+
+
+def get_user_all_info(request):
+    """
+    获取所有用户信息
+    :param request:
+    :return:
+    """
+    user_login = UserLoinInterface.get_user_login_list(page=0, page_size=0)
+    try:
+        res = UserInfoInterface.get_user_detail_list_by_user_login(user_login_list=user_login.get('results'))
+        return render_json(success_return(u'获取用户列表成功', res))
+    except Exception as e:
+        return render_json(error_return(u'获取用户列表失败' + str(e)))
+
+
+def get_all_science_type(request):
+    """
+    获取所有科研类型
+    :param request:
+    :return:
+    """
+    res = ScienceTypeInterface.get_all_science_type()
+    print res
+    return render_json(res)
+
+
+def science_type_html(request):
+    """
+    科研类型管理页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, '/science_type/science_type.html')
+
+
+def add_science_type(request):
+    """
+    新增科研类型
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    type_name = request_body.get('type_name')
+    res = ScienceTypeInterface.insert_science_type(type_name)
+    return render_json(res)
+
+
+def update_science_type(request):
+    """
+    修改科研类型
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    type_name = request_body.get('type_name')
+    type_id = request_body.get('type_id')
+    res = ScienceTypeInterface.update_science_type(type_id=type_id, type_name=type_name)
+    return render_json(res)
+
+
+def my_info_html(request):
+    """
+    我的信息页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, '/user/my_info.html')
+
+
+def get_active_user_info(request):
+    """
+    获取当前用户信息
+    :param request:
+    :return:
+    """
+    user_id = request.session['user_id']
+    user_login = UserLoinInterface.get_user_login_by_id(user_id=user_id)
+    user_login_list = []
+    user_login_list.append(user_login.get('results'))
+    try:
+        res = UserInfoInterface.get_user_detail_list_by_user_login(user_login_list=user_login_list)
+        return render_json(success_return(u'获取用户列表成功', res))
+    except Exception as e:
+        return render_json(error_return(u'获取用户列表失败' + str(e)))
+
+
+def update_user_info(request):
+    """
+    修改用户信息
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    user_id = request_body.get('user_id')
+    user_name = request_body.get('user_name')
+    user_password = request_body.get('user_password')
+    user_type = request_body.get('user_type')
+    user_email = request_body.get('user_email')
+    user_address = request_body.get('user_address')
+    user_phone = request_body.get('user_phone')
+    science_type_id = request_body.get('science_type_id')
+    res = UserInfoInterface.update_user_info(user_id=user_id, user_name=user_name, user_password=user_password,
+                                             user_type=user_type, user_email=user_email, user_address=user_address,
+                                             user_phone=user_phone, science_type_id=science_type_id)
+    return render_json(res)
+
+
+def add_user_info(request):
+    """
+    新增用户信息
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    user_id = uuid.uuid1()
+    user_name = request_body.get('user_name')
+    user_password = request_body.get('user_password')
+    user_type = request_body.get('user_type')
+    user_email = request_body.get('user_email')
+    user_address = request_body.get('user_address')
+    user_phone = request_body.get('user_phone')
+    science_type_id = request_body.get('science_type_id')
+    res = UserInfoInterface.add_user_info(user_id=user_id, user_name=user_name, user_password=user_password,
+                                          user_type=user_type, user_email=user_email, user_address=user_address,
+                                          user_phone=user_phone, science_type_id=science_type_id)
+    return render_json(res)
+
+
+def get_specialist_group_by_science_type(request):
+    """
+    获取专家列表，并对其进行分组
+    :param request:
+    :return:
+    """
+    specialist_res = UserLoinInterface.get_specialist()
+    specialist = specialist_res.get('results')
+    res = ScienceTypeInterface.get_specialist_group_by_science_type(specialist)
+    res = res
     return render_json(res)

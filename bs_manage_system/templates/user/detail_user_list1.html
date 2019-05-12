@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <style>
+        a:hover {
+            color: #283593;
+            text-decoration: none
+        }
+
+        a {
+            color: #283593;
+            text-decoration: none
+        }
+
+        .el-table-add-row {
+            margin-top: 10px;
+            width: 100%;
+            height: 34px;
+            border: 1px dashed #c1c1cd;
+            border-radius: 3px;
+            cursor: pointer;
+            justify-content: center;
+            display: flex;
+            line-height: 34px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>用户设置</h2>
+<div id="vue">
+
+    <!--start table-->
+    <el-table :data="user_list.data" border style="width: 100%">
+        <el-table-column type="index"></el-table-column>
+        <el-table-column prop="user_name" label="用户名称" width="180">
+            <template slot-scope="scope">
+                <span v-if="scope.row.isSet">
+                    <el-input size="mini" placeholder="请输入内容" v-model="scope.row.user_name">
+                    </el-input>
+                </span>
+                <span v-else>{{ scope.row.user_name }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="user_type" label="用户类型" width="200">
+            <template slot-scope="scope">
+                <span v-if="scope.row.user_type===0">管理员</span>
+                <span v-if="scope.row.user_type===1">申报人员</span>
+                <span v-if="scope.row.user_type===2">审批专家</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="user_address" label="家庭住址" width="400">
+        </el-table-column>
+        <el-table-column prop="user_email" label="用户邮箱" width="200">
+        </el-table-column>
+        <el-table-column prop="user_phone" label="用户电话" width="180">
+        </el-table-column>
+        <el-table-column label="操作">
+
+
+            <template slot-scope="scope">
+                <div v-show="!scope.row.isSet" :key="scope.$index">
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;"
+                          @click="editChange(scope.row, scope.$index)">
+                                修改{{ scope.row.isSet }}
+                    </span>
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;">
+                                删除
+                    </span>
+                </div>
+                <div v-if="scope.row.isSet" :key="scope.row.user_id">
+                    <span class="el-tag  el-tag--mini" style="cursor: pointer;"
+                          @click="saveChange(scope)">
+                                保存{{ scope.row.isSet }}
+                    </span>
+
+                    <span class="el-tag  el-tag--mini" style="cursor: pointer;"
+                          @click="closeChange(scope.$index)">
+                                    取消
+                    </span>
+                </div>
+            </template>
+        </el-table-column>
+    </el-table>
+    <div class="el-table-add-row" style="width: 99.2%;" @click="addMasterUser()"><span>+ 添加</span></div>
+    <!--end table-->
+
+    <!--start dialog--
+    <el-dialog title="请输入用户信息" :visible.sync="dialogFormVisible">
+        <el-form :model="form">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+                <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+                <el-select v-model="form.region" placeholder="请选择活动区域">
+                    <el-option label="区域一" value="shanghai"></el-option>
+                    <el-option label="区域二" value="beijing"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+    </el-dialog>
+    <-end dialog-->
+
+</div>
+
+<script>
+    let vm = new Vue({
+        el: '#vue',
+        data: {
+            user_list: {
+                sel: null,//选中行
+                data: [{
+                    "user_phone": "18570332683",
+                    "user_id": "1",
+                    "science_type_id": "2019-05-07 12:04:00.844000+00:00",
+                    "user_password": "123456",
+                    "user_type": 0,
+                    "user_address": "\u957f\u6c99\u5b66\u9662",
+                    "user_name": "admin",
+                    "id": 1,
+                    "user_email": "761494073@qq.com",
+                    "isSet":false,
+                }, {
+                    "user_phone": "111",
+                    "user_id": "2",
+                    "science_type_id": "2019-05-07 12:04:00.844000+00:00",
+                    "user_password": "123456",
+                    "user_type": 1,
+                    "user_address": "111",
+                    "user_name": "apply",
+                    "id": 2,
+                    "user_email": "1111"
+                }, {
+                    "user_phone": "3",
+                    "user_id": "3",
+                    "science_type_id": "2019-05-07 12:04:00.844000+00:00",
+                    "user_password": "123456",
+                    "user_type": 2,
+                    "user_address": "3",
+                    "user_name": "review",
+                    "id": 3,
+                    "user_email": "3"
+                }, {
+                    "user_phone": "4",
+                    "user_id": "4",
+                    "science_type_id": "2019-05-07 12:04:00.844000+00:00",
+                    "user_password": "123456",
+                    "user_type": 2,
+                    "user_address": "4",
+                    "user_name": "review2",
+                    "id": 4,
+                    "user_email": "4"
+                }],
+            },
+        },
+        methods: {
+            //获取用户列表
+            get_user_list() {
+                /****axios({
+                    url: '/get_user_all_info/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.user_list.data = res.data.results;
+                        vm.user_list.data.map(i => {
+                            i.isSet = false;
+                        });
+                    } else {
+                        vm.$message(vm.data.message);
+                    }
+                }).catch(res => {
+                    console.log(res);
+                    vm.$message('服务器错误');
+                });***/
+
+                vm.user_list.data.map(i => {
+                    i.isSet = false;
+                });
+            },
+            //删除用户
+            delete_user_by_id(user_id) {
+
+            },
+            //修改用户
+            update_user_by_id() {
+
+            },
+            //打开编辑窗口
+            open_dialog(project_id, project_name) {
+
+            },
+            //关闭编辑窗口
+            close_dialog() {
+
+            },
+            addMasterUser() {
+                for (let i of vm.user_list.data) {
+                    if (i.isSet) return vm.$message.warning("请先保存当前编辑项");
+                }
+                let j = {
+                    "user_id": "",
+                    "user_name": "",
+                    "user_type": "",
+                    "user_address": "",
+                    "user_email": "",
+                    "user_phone": "",
+                    "isSet": true,
+                };
+                vm.user_list.data.push(j);
+                vm.user_list.sel = JSON.parse(JSON.stringify(j));
+            },
+            closeChange(index) {
+                vm.user_list.data[index].isSet = false;
+                vm.user_list.data.splice(index, 1);
+            },
+            saveChange(row) {
+                //点击修改 判断是否已经保存所有操作
+                for (let i of vm.user_list.data) {
+                    if (i.isSet) {
+                        vm.$message.warning("请先保存当前编辑项");
+                        return false;
+                    }
+                }
+                row.isSet = false;
+            },
+            editChange(row, index) {
+                console.log(row)
+                console.log(vm.user_list.data);
+
+                //row.isSet = !row.isSet;
+                vm.user_list.data[index].isSet = true;
+                var a = vm.user_list;
+                vm.user_list = null;
+                vm.user_list = a;
+
+                vm.$forceUpdate();
+            }
+        },
+    });
+    vm.get_user_list();
+</script>
+</body>
+</html>

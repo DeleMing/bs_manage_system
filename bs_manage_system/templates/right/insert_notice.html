@@ -29,13 +29,13 @@
 </head>
 <body>
 <div id="vue">
-    <h1 style="text-align: center">发布通知</h1>
+    <h1 style="text-align: center">发布项目申报通知</h1>
     <el-form label-position="top" label-width="80px" :model="form">
         <el-form-item label="标题名称:">
-            <el-input v-model="form.title"></el-input>
+            <el-input v-model="form.title" maxlength="600"></el-input>
         </el-form-item>
         <el-form-item label="通知内容:">
-            <script id="editor" type="text/plain" style="height:480px;"></script>
+            <script id="editor" type="text/plain" style="height:360px;width: 100%"></script>
         </el-form-item>
         <el-button type="success" round @click="insert_notice">成功按钮</el-button>
     </el-form>

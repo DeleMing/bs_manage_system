@@ -29,13 +29,11 @@ class NoticeInterface():
             # 全部取出
             pass
         else:
-
             notices = Notification.objects.values().all().order_by('-create_time')
             paginator = Paginator(notices, page_size)
             temp_list = paginator.page(page)
             for i in temp_list:
                 i['create_time'] = i['create_time'].strftime("%Y-%m-%d %H:%M:%S")
-
                 i['page'] = page
                 i['page_count'] = paginator.num_pages
                 i['count'] = paginator.count

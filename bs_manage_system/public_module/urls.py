@@ -38,5 +38,19 @@ urlpatterns = patterns(
     (r'^get_other_review_by_project_id/$', 'get_other_review_by_project_id'),
     (r'^get_my_review_by_project_id/$', 'get_my_review_by_project_id'),
     (r'^submit_my_review/$', 'submit_my_review'),
+    (r'^detail_user_list_html/$', 'detail_user_list_html'),
+    (r'^get_user_login_list/$', 'get_user_login_list'),
+    (r'^get_user_all_info/$', 'get_user_all_info'),
+    (r'^get_all_science_type/$', 'get_all_science_type'),
+    (r'^science_type_html/$', 'science_type_html'),
+    (r'^add_science_type/$', 'add_science_type'),
+    (r'^update_science_type/$', 'update_science_type'),
+    (r'^my_info_html/$', 'my_info_html'),
+    (r'^get_active_user_info/$', 'get_active_user_info'),
+    (r'^update_user_info/$', 'update_user_info'),
+    (r'^add_user_info/$', 'add_user_info'),
+    (r'^get_specialist_group_by_science_type/$', 'get_specialist_group_by_science_type'),
+
+
     (r'^user_login/$', 'user_login'),  # 登陆
 )

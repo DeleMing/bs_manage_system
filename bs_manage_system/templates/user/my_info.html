@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的信息</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <style>
+        .main_div {
+            margin-top: 10px;
+            border-bottom: 1px dashed #000;
+            padding-bottom: 10px;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+<h2>个人设置</h2>
+<div id="app">
+    <div class="main_div">
+        <el-row>
+            <el-col :span="3">
+                <span>用户名：</span>
+            </el-col>
+            <el-rol>
+                <span v-if="edit_status" :span="21">
+                    {{ user_info.user_name }}
+                </span>
+                <span v-else :span="21">{{ user_info.user_name }}</span>
+            </el-rol>
+        </el-row>
+    </div>
+    <div class="main_div">
+        <el-row>
+            <el-col :span="3">
+                <span>密码：</span>
+            </el-col>
+            <el-rol>
+                <span v-if="edit_status" :span="21">
+                    <el-input type="password" placeholder="请输入内容" v-model="user_info.user_name" style="width: 70%">
+                    </el-input>
+                </span>
+                <span v-else :span="21">*********</span>
+            </el-rol>
+        </el-row>
+    </div>
+    <div class="main_div">
+        <el-row>
+            <el-col :span="3">
+                <span>地址：</span>
+            </el-col>
+            <el-rol>
+                <span v-if="edit_status" :span="21">
+                    <el-input placeholder="请输入内容" v-model="user_info.user_address" style="width: 70%">
+                    </el-input>
+                </span>
+                <span v-else :span="21">{{ user_info.user_address }}</span>
+            </el-rol>
+        </el-row>
+    </div>
+    <div class="main_div">
+        <el-row>
+            <el-col :span="3">
+                <span>邮箱：</span>
+            </el-col>
+            <el-rol>
+                <span v-if="edit_status" :span="21">
+                    <el-input placeholder="请输入内容" v-model="user_info.user_email" style="width: 70%">
+                    </el-input>
+                </span>
+                <span v-else :span="21">{{ user_info.user_email }}</span>
+            </el-rol>
+        </el-row>
+    </div>
+    <div class="main_div">
+        <el-row>
+            <el-col :span="3">
+                <span>联系电话：</span>
+            </el-col>
+            <el-rol>
+                <span v-if="edit_status" :span="21">
+                    <el-input placeholder="请输入内容" v-model="user_info.user_phone" style="width: 70%">
+                    </el-input>
+                </span>
+                <span v-else :span="21">{{ user_info.user_phone }}</span>
+            </el-rol>
+        </el-row>
+    </div>
+    <el-button v-if="edit_status" @click="save_user_info" style="margin-left: 65%;margin-top: 15px" type="success">保存</el-button>
+    <el-button v-else @click="edit_status = !edit_status" style="margin-left: 65%;margin-top:15px" type="success">编辑</el-button>
+
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            edit_status: false,
+            user_info: {
+                user_id: '',
+                user_name: '',
+                user_password: '',
+                user_type: '',
+                user_address: '',
+                user_email: '',
+                science_type_id: '',
+                user_phone: '',
+            }
+        },
+        methods: {
+            //保存用户信息
+            get_user_info() {
+                axios({
+                    url: '/get_active_user_info/'
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.user_info.user_name = res.data.results[0].user_name;
+                        vm.user_info.user_id = res.data.results[0].user_id;
+                        vm.user_info.user_password = res.data.results[0].user_password;
+                        vm.user_info.user_type = res.data.results[0].user_type;
+                        vm.user_info.user_address = res.data.results[0].user_address;
+                        vm.user_info.user_email = res.data.results[0].user_email;
+                        vm.user_info.science_type_id = res.data.results[0].science_type_id;
+                        vm.user_info.user_phone = res.data.results[0].user_phone;
+                    } else {
+                        vm.$message.error(res.data.message)
+                    }
+                }).catch(res => {
+                    console.log(res);
+                    vm.$message.error('服务器错误')
+                })
+            },
+            //修改用户信息
+            save_user_info() {
+                vm.edit_status = false;
+                axios({
+                    url:'/update_user_info/',
+                    method:'post',
+                    data:vm.user_info,
+                }).then( res => {
+                    console.log(res);
+                    vm.$message.success(res.data.message);
+                    vm.get_user_info();
+                }).catch( res => {
+                    console.log('服务器错误');
+                })
+            },
+        }
+    });
+    vm.get_user_info();
+</script>
+</body>
+</html>

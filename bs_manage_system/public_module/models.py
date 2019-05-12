@@ -11,6 +11,7 @@ class UserLogin(models.Model):
     user_name = models.CharField(max_length=32)
     user_password = models.CharField(max_length=64)
     user_type = models.IntegerField()
+    science_type_id = models.CharField(max_length=64)
 
 
 class UserInfo(models.Model):
@@ -83,4 +84,12 @@ class Project(models.Model):
     start_time = models.TimeField(auto_now_add=True)
     stop_time = models.TimeField(auto_now_add=True)
     project_status = models.IntegerField()
+    science_type_id = models.CharField(max_length=64)
 
+
+class ScienceType(models.Model):
+    """
+    科研类型
+    """
+    type_id = models.CharField(max_length=64)
+    type_name = models.CharField(max_length=64)

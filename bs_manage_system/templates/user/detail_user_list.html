@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告--2.5.51 assets/-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/vue.development.js"></script>
+    <!-- 生产环境版 本，优化了尺寸和速度 功能完善后请将vue.development.js该为vue.js-->
+    <!--<script src="assets/vue-2.5.21/vue.js"></script>-->
+    <!-- element UI引入样式 -->
+    <link href="${STATIC_URL}assets/element-2.4.11/index.css" rel="stylesheet">
+    <!-- element UI引入组件库 -->
+    <script src="${STATIC_URL}assets/element-2.4.11/index.js"></script>
+    <!-- vue的ajax依赖-->
+    <script src="${STATIC_URL}assets/vue-2.5.21/axios.min.js"></script>
+    <style>
+        a:hover {
+            color: #283593;
+            text-decoration: none
+        }
+
+        a {
+            color: #283593;
+            text-decoration: none
+        }
+
+        .el-table-add-row {
+            margin-top: 10px;
+            width: 100%;
+            height: 34px;
+            border: 1px dashed #c1c1cd;
+            border-radius: 3px;
+            cursor: pointer;
+            justify-content: center;
+            display: flex;
+            line-height: 34px;
+        }
+    </style>
+
+</head>
+<body>
+<h2>用户管理</h2>
+<div id="vue">
+    <el-button @click="insert_dialog" type="">新增用户</el-button>
+    <!--start table-->
+    <el-table :data="user_list.data" border style="width: 100%">
+        <el-table-column type="index"></el-table-column>
+        <el-table-column prop="user_name" label="用户名称" width="180">
+
+        </el-table-column>
+        <el-table-column prop="user_type" label="用户类型" width="200">
+            <template slot-scope="scope">
+                <span v-if="scope.row.user_type===0">管理员</span>
+                <span v-if="scope.row.user_type===1">申报人员</span>
+                <span v-if="scope.row.user_type===2">审批专家</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="user_address" label="家庭住址" width="400">
+        </el-table-column>
+        <el-table-column prop="user_email" label="用户邮箱" width="200">
+        </el-table-column>
+        <el-table-column prop="user_phone" label="用户电话" width="180">
+        </el-table-column>
+        <el-table-column label="操作">
+
+            <template slot-scope="scope">
+                <div v-show="!scope.row.isSet" :key="scope.$index">
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;"
+                          @click="update_dialog(scope.row)">
+                                修改
+                    </span>
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;">
+                                删除
+                    </span>
+                </div>
+            </template>
+        </el-table-column>
+    </el-table>
+    <!--end table-->
+    <!--start dialog-->
+    <el-dialog title="请输入用户信息" :visible.sync="dialogFormVisible">
+        <el-form :model="user_info">
+            <el-form-item label="用户名：">
+                <el-input v-if="user_info.user_id!=''" v-model="user_info.user_name" autocomplete="off" size="mini" :disabled="true"></el-input>
+                <el-input v-else v-model="user_info.user_name" autocomplete="off" size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="密码：">
+                <el-input v-model="user_info.user_password" autocomplete="off" size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="联系地址：">
+                <el-input v-model="user_info.user_address" autocomplete="off" size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="用户邮箱：">
+                <el-input v-model="user_info.user_email" autocomplete="off" size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="用户电话：">
+                <el-input v-model="user_info.user_phone" autocomplete="off" size="mini"></el-input>
+            </el-form-item>
+            <el-form-item label="用户类型：">
+                <el-radio-group v-model="user_info.user_type">
+                    <el-radio :label="0">管理员</el-radio>
+                    <el-radio :label="1">申请者</el-radio>
+                    <el-radio :label="2">审批专家</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="领域：" v-if="user_info.user_type==2">
+                <el-select v-model="user_info.science_type_id" placeholder="请选择">
+                    <el-option
+                            v-for="item in options"
+                            :key="item.type_id"
+                            :label="item.type_name"
+                            :value="item.type_id">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="close_dialog">取 消</el-button>
+            <el-button type="primary" @click="submit_user_info">确 定</el-button>
+        </div>
+    </el-dialog>
+    <!--end dialog-->
+</div>
+<script>
+    let vm = new Vue({
+        el: '#vue',
+        data: {
+            dialogFormVisible: false,
+            user_list: {
+                sel: null,//选中行
+                data: [],
+            },
+            user_info: {
+                user_id: '',
+                user_name: '',
+                user_password: '',
+                user_type: '',
+                user_address: '',
+                user_email: '',
+                science_type_id: '',
+                user_phone: '',
+            },
+            options:[],
+        },
+        methods: {
+            //获取科研领域
+            get_all_science_type(){
+                axios({
+                    url:'/get_all_science_type/'
+                }).then( res => {
+                    console.log(res);
+                    vm.options = res.data.results;
+                }).catch( res => {
+                    console.log(res);
+                })
+            },
+            //获取用户列表
+            get_user_list() {
+                axios({
+                    url: '/get_user_all_info/',
+                }).then(res => {
+                    console.log(res);
+                    if (res.data.code === 0) {
+                        vm.user_list.data = res.data.results;
+                        vm.user_list.data.map(i => {
+                            i.isSet = false;
+                        });
+                    } else {
+                        vm.$message(vm.data.message);
+                    }
+                }).catch(res => {
+                    console.log(res);
+                    vm.$message('服务器错误');
+                });
+            },
+            //打开修改窗口
+            update_dialog(row) {
+                vm.dialogFormVisible = true;
+                vm.user_info.user_name = row.user_name;
+                vm.user_info.user_id = row.user_id;
+                vm.user_info.user_password = row.user_password;
+                vm.user_info.user_type = row.user_type;
+                vm.user_info.user_address = row.user_address;
+                vm.user_info.user_email = row.user_email;
+                vm.user_info.science_type_id = row.science_type_id;
+                vm.user_info.user_phone = row.user_phone;
+                console.log(vm.user_info)
+            },
+            //关闭编辑窗口
+            close_dialog() {
+                vm.dialogFormVisible = false;
+                vm.user_info.user_name = '';
+                vm.user_info.user_id = '';
+                vm.user_info.user_password = '';
+                vm.user_info.user_type = '';
+                vm.user_info.user_address = '';
+                vm.user_info.user_email = '';
+                vm.user_info.science_type_id = '';
+                vm.user_info.user_phone = '';
+            },
+            insert_dialog() {
+                vm.dialogFormVisible = true;
+            },
+            //打开编辑窗口
+            open_dialog(project_id, project_name) {
+
+            },
+            //提交用户信息
+            submit_user_info(){
+                console.log(vm.user_info)
+                if (vm.user_info.user_id == ''){
+                    //新增
+                    console.log('insert');
+                    axios({
+                        url:'/add_user_info/',
+                        method:'post',
+                        data:vm.user_info,
+                    }).then( res => {
+                        console.log(res);
+                        if (res.data.code === 0){
+                            vm.$message.success(res.data.message)
+                            vm.get_user_list();
+                            vm.close_dialog();
+                        }else{
+                            vm.$message.error(res.data.message)
+                        }
+                    }).catch( res => {
+                        vm.close_dialog();
+                        vm.$message.error('请求出错'+ res)
+                    })
+                }else {
+                    //修改
+                    console.log('update');
+                    axios({
+                        url:'/update_user_info/',
+                        method:'post',
+                        data:vm.user_info,
+                    }).then( res => {
+                        console.log(res);
+                        if (res.data.code === 0){
+                            vm.$message.success(res.data.message)
+                            vm.get_user_list();
+                            vm.close_dialog();
+                        }else{
+                            vm.$message.error(res.data.message)
+                        }
+                    }).catch( res => {
+                        vm.close_dialog();
+                        vm.$message.error('请求出错'+ res)
+                    })
+                }
+            },
+
+        },
+    });
+    vm.get_user_list();
+    vm.get_all_science_type();
+</script>
+</body>
+</html>

@@ -75,8 +75,8 @@
                             @size-change="handleSizeChange"
                             @current-change="handleCurrentChange"
                             :current-page="1"
-                            :page-sizes="[5, 10, 15, 20]"
-                            :page-size="page_count"
+                            :page-sizes="[5, 10, 15]"
+                            :page-size="page_size"
                             layout="total, sizes, prev, pager, next, jumper"
                             :total="count">
                     </el-pagination>
@@ -90,7 +90,7 @@
             el: '#vue',
             data: {
                 page: 1,
-                page_size: 2,
+                page_size: 5,
                 page_count:1,
                 count:1,
                 notices_list:[],
