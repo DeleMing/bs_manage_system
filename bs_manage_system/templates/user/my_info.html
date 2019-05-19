@@ -95,6 +95,7 @@
         </el-row>
     </div>
     <el-button v-if="edit_status" @click="save_user_info" style="margin-left: 65%;margin-top: 15px" type="success">保存</el-button>
+    <el-button v-if="edit_status" @click="exit_edit">取消</el-button>
     <el-button v-else @click="edit_status = !edit_status" style="margin-left: 65%;margin-top:15px" type="success">编辑</el-button>
 
 </div>
@@ -152,6 +153,10 @@
                 }).catch( res => {
                     console.log('服务器错误');
                 })
+            },
+            //取消
+            exit_edit(){
+                vm.edit_status = false;
             },
         }
     });

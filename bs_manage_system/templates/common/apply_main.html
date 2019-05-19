@@ -55,7 +55,7 @@
                         <i class="iconfont icon-xitong"></i>
                         <span class="el-submenu">个人设置</span>
                     </template>
-                    <el-menu-item index="5-3" v-on:click="change_html('html4')">人员管理</el-menu-item>
+                    <el-menu-item index="5-3" v-on:click="change_html('html4')">个人信息管理</el-menu-item>
                 </el-submenu>
                 <div index="10000" style="line-height: 56px;margin-left: 20px;height: 60%;">
                     <div style="height: 90%;"></div>
@@ -87,7 +87,7 @@
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>修改密码</el-dropdown-item>
-                                    <el-dropdown-item><a href="/user_manage/user_out">注销</a></el-dropdown-item>
+                                    <el-dropdown-item><a href="/login_out">注销</a></el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -108,7 +108,7 @@
                         src="/issue_notices"
                         frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html4" class="ifa" scrolling=auto
-                        src="/user_setting"
+                        src="/my_info_html"
                         frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html5" class="ifa" scrolling=auto
                         src="/my_apply"

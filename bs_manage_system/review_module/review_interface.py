@@ -92,3 +92,4 @@ class ReviewInterface():
             i['review_time'] = i['review_time'].strftime("%Y-%m-%d %H:%M:%S")
             result_list.append(i)
         return success_return(u'获取评审信息列表成功', result_list)
+

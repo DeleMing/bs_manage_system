@@ -7,6 +7,7 @@ from django.forms import model_to_dict
 from public_module.public_tools import success_return
 from public_module.public_tools import error_return
 from public_module.models import ScienceType
+from user_module.user_interface import UserLoinInterface
 import uuid
 
 
@@ -67,3 +68,22 @@ class ScienceTypeInterface():
                     return error_return(u'修改科研类型名称已存在')
         except Exception as e:
             return error_return(u'修改科研类型异常')
+
+    @classmethod
+    def get_specialist_group_by_science(cls):
+        """
+
+        :return:
+        """
+        result_list = []
+        temp_list = []
+        science_type_list = ScienceType.objects.values().all()
+        for i in science_type_list:
+            temp_list.append(i)
+            user_temp_list = []
+            user_login_list = UserLoinInterface.get_specialist_by_type_id(science_type_id=i.get('type_id'))
+            for j in user_login_list:
+                user_temp_list.append(j)
+            i['user_list'] = user_temp_list
+            result_list.append(i)
+        return success_return(u'获取专家列表成功', result_list)

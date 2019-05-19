@@ -4,6 +4,7 @@ from django.db import transaction
 from public_module.models import Project
 from public_module.public_tools import success_return
 from public_module.public_tools import error_return
+from review_module.review_interface import ReviewInterface
 import uuid
 
 
@@ -17,7 +18,7 @@ class ProjectInterface():
 
     @classmethod
     def insert_project(cls, project_name, project_time, apply_user_name, apply_user_id, research_content,
-                       technology_new, expected_goal, participator, start_time, stop_time):
+                       technology_new, expected_goal, participator, start_time, stop_time, science_type_id):
         """
         新增项目信息
         :param project_name:
@@ -30,6 +31,7 @@ class ProjectInterface():
         :param participator:
         :param start_time:
         :param stop_time:
+        :param science_type_id:
         :return:
         """
         project_id = uuid.uuid1()
@@ -39,7 +41,7 @@ class ProjectInterface():
                                        apply_user_name=apply_user_name, apply_user_id=apply_user_id,
                                        research_content=research_content, technology_new=technology_new,
                                        expected_goal=expected_goal, participator=participator, start_time=start_time,
-                                       stop_time=stop_time, project_status=0)
+                                       stop_time=stop_time, project_status=0, science_type_id=science_type_id)
             return success_return(u'新增项目成功', {'project_id': str(project_id)})
         except Exception as e:
             return error_return(u'新增项目失败' + str(e))
@@ -162,6 +164,52 @@ class ProjectInterface():
                 i['page_count'] = paginator.num_pages
                 i['count'] = paginator.count
                 result_list.append(i)
+        return success_return(u'获取申请成功', result_list)
+
+    @classmethod
+    def get_project_statement(cls):
+        """
+        获取审批报表
+        :return:
+        """
+        result_list = []
+        temp_list = []
+        project_list = Project.objects.values().filter(project_status__in=[2,3,4])
+        for i in project_list:
+            i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+            i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+            i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+            temp_list.append(i)
+            review_list = []
+            review_temp_list = ReviewInterface.get_review_list_by_project_id(project_id=i.get('project_id'))
+            for j in review_temp_list.get('results'):
+                # j['review_time'] = j['review_time'].strftime("%Y-%m-%d %H:%M:%S")
+                review_list.append(j)
+            i['review_list'] = review_list
+            result_list.append(i)
+        return success_return(u'获取报表成功', result_list)
+
+    @classmethod
+    def get_project_by_project_name(cls, project_name, page, page_size):
+        """
+
+        :param project_name:
+        :param page:
+        :param page_size:
+        :return:
+        """
+        result_list = []
+        project = Project.objects.values().filter(project_name__icontains=project_name).order_by('-project_time')
+        paginator = Paginator(project, page_size)
+        temp_list = paginator.page(page)
+        for i in temp_list:
+            i['project_time'] = i['project_time'].strftime("%Y-%m-%d %H:%M:%S")
+            i['start_time'] = i['start_time'].strftime("%H:%M:%S")
+            i['stop_time'] = i['stop_time'].strftime("%H:%M:%S")
+            i['page'] = page
+            i['page_count'] = paginator.num_pages
+            i['count'] = paginator.count
+            result_list.append(i)
         return success_return(u'获取申请成功', result_list)
 
     @classmethod

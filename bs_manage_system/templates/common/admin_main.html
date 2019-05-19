@@ -54,6 +54,11 @@
                     <span slot="title">给项目分配给评审专家</span>
                 </el-menu-item>
 
+                <el-menu-item index="6" style="height: 44px;line-height: 44px;" v-on:click="change_html('html8')">
+                    <i class="iconfont icon-changjingguanli"></i>
+                    <span slot="title">项目查看</span>
+                </el-menu-item>
+
                 <el-submenu index="5">
                     <template slot="title">
                         <i class="iconfont icon-xitong"></i>
@@ -61,6 +66,7 @@
                     </template>
                     <el-menu-item index="5-3" v-on:click="change_html('html5')">人员管理</el-menu-item>
                     <el-menu-item index="5-2" v-on:click="change_html('html6')">科研类型管理</el-menu-item>
+                    <el-menu-item index="5-1" v-on:click="change_html('html7')">报表</el-menu-item>
 
                 </el-submenu>
 
@@ -94,7 +100,7 @@
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>修改密码</el-dropdown-item>
-                                    <el-dropdown-item><a href="/user_manage/user_out" >注销</a></el-dropdown-item>
+                                    <el-dropdown-item><a href="/login_out" >注销</a></el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </div>
@@ -118,10 +124,16 @@
                                 src="/project_to_review_html"
                                 frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html5" class="ifa" scrolling=auto
-                                src="/my_apply"
+                                src="/detail_user_list_html"
                                 frameborder="0" height="800px;"></iframe>
                 <iframe v-if="ifArr.html6" class="ifa" scrolling=auto
                                 src="/science_type_html"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html7" class="ifa" scrolling=auto
+                                src="/project_specialist_html"
+                                frameborder="0" height="800px;"></iframe>
+                <iframe v-if="ifArr.html8" class="ifa" scrolling=auto
+                                src="/project_list_html"
                                 frameborder="0" height="800px;"></iframe>
             </el-main>
             <!--end right body-->

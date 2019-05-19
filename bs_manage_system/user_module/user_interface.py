@@ -194,5 +194,8 @@ class UserLoinInterface():
         :param science_type_id:
         :return:
         """
-        user_list = UserLogin.objects.values().filter(science_type_id=science_type_id)
-        return user_list
+        result_list = []
+        user_list = UserLogin.objects.values().filter(science_type_id=science_type_id, user_type=2)
+        for i in user_list:
+            result_list.append(i)
+        return result_list

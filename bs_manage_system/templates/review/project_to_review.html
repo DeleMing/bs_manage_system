@@ -48,12 +48,15 @@
         </el-table-column>
         <el-table-column label="操作">
             <template slot-scope="scope">
-                <el-button @click="open_dialog(scope.row.project_id, scope.row.project_name)" type="primary">设置评审专家</el-button>
+                <el-button @click="open_dialog(scope.row.project_id, scope.row.project_name, scope.row.science_type_id)"
+                           type="primary">设置评审专家
+                </el-button>
             </template>
             </template>
         </el-table-column>
     </el-table>
 
+    <!--
     <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
         <span>
             <el-form ref="form" :model="form" label-width="100px">
@@ -82,6 +85,25 @@
         <el-button type="primary" @click="submit_review">确 定</el-button>
         </span>
     </el-dialog>
+    -->
+
+
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+
+        <div v-for="i in review_list">
+            <span>{{ i.type_name }}:</span>
+            <el-checkbox-group v-model="form.review_list">
+                <li v-for="j in i.user_list">
+                    <el-checkbox :label="j.user_name" name="type">{{ j.user_name }}</el-checkbox>
+                </li>
+            </el-checkbox-group>
+        </div>
+
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submit_review">确 定</el-button>
+        </span>
+    </el-dialog>
 
 </div>
 
@@ -89,6 +111,7 @@
     let vm = new Vue({
         el: '#vue',
         data: {
+            review_list: [],
             project_table: [],
             options4: [],
             value9: [],
@@ -96,11 +119,11 @@
             states: [],
             loading: false,
             form: {
-                project_id:'',
-                review_list:[],
+                project_id: '',
+                review_list: [],
             },
             dialogVisible: false,
-            dialogTitle:'',
+            dialogTitle: '',
         },
         methods: {
             handleClose(done) {
@@ -108,7 +131,7 @@
                     .then(_ => {
                         done();
                     })
-                    .catch(_=> {
+                    .catch(_ => {
                     });
             },
             async get_my_apply_project() {
@@ -142,7 +165,7 @@
                 window.location.href = '${SITE_URL}download_static/?accessories_url=' + value + '&' + 'accessories_name=' + accessories_name
             },
             //获取评审专家列表
-            get_review_list() {
+            get_review_list_20190520() {
                 axios({
                     url: '/get_user_list_by_type/',
                     method: 'post',
@@ -174,28 +197,54 @@
                     this.options4 = [];
                 }
             },
+
             //打开设置评审专家页面
-            open_dialog(project_id, project_name){
+            open_dialog(project_id, project_name, science_type_id) {
+                vm.form.review_list = [];
                 vm.dialogVisible = true;
-                vm.dialogTitle = '给项目：'+ project_name +'选择评审专家';
+                vm.dialogTitle = '给项目：' + project_name + '选择评审专家';
                 vm.form.project_id = project_id;
-            },
-            //提交审批专家
-            submit_review(){
-                vm.form.review_list = vm.value9;
-                console.log(vm.form);
-                axios({
-                    url:'/submit_review/',
-                    method:'post',
-                    data:vm.form,
-                }).then( res => {
-                    console.log(res);
-                }).catch( res => {
-                    console.log(res);
-                })
-                vm.dialogVisible = false;
+                //选中默认项
+                for (let i = 0; i <= vm.review_list.length; i++) {
+                    if (science_type_id == vm.review_list[i].type_id) {
+                        for (let j = 0; i <= vm.review_list[i].user_list.length; j++) {
+                            vm.form.review_list.push(vm.review_list[i].user_list[j].user_name);
+                        }
+                    }
+                }
             },
 
+            //提交审批专家
+            submit_review() {
+                console.log(vm.form);
+                if (vm.form.review_list.length == 0) {
+                    vm.$message.error('请选择审批专家')
+                } else {
+                    axios({
+                        url: '/submit_review/',
+                        method: 'post',
+                        data: vm.form,
+                    }).then(res => {
+                        console.log(res);
+                        vm.$message.success('项目分发成功');
+                        vm.get_my_apply_project();
+                    }).catch(res => {
+                        console.log(res);
+                    })
+                }
+                vm.dialogVisible = false;
+            },
+            //获取专家列表
+            get_review_list() {
+                axios({
+                    url: '/get_specialist_group_by_science_type/'
+                }).then(res => {
+                    console.log(res);
+                    vm.review_list = res.data.results;
+                }).catch(res => {
+                    console.log(res);
+                });
+            },
         }
     });
     vm.get_my_apply_project();

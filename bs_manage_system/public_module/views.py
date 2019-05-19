@@ -132,6 +132,16 @@ def user_login(request):
     return render_json(temp_result)
 
 
+def login_out(request):
+    """
+    用户注销
+    :param request:
+    :return:
+    """
+    del request.session
+    return render_mako_context(request, 'common/login.html')
+
+
 def get_notice_by_session(request):
     """
     通过session中的通知ID获取通知
@@ -239,6 +249,7 @@ def insert_project(request):
     research_content = request_body.get('research_content')
     technology_new = request_body.get('technology_new')
     expected_goal = request_body.get('expected_goal')
+    science_type = request_body.get('science_type')
     participator = request_body.get('participator')
     start_time = request_body.get('start_time')
     stop_time = request_body.get('stop_time')
@@ -250,7 +261,7 @@ def insert_project(request):
                                           technology_new=technology_new, expected_goal=expected_goal,
                                           participator=participator,
                                           start_time=now_time, stop_time=now_time, apply_user_id=apply_user_id,
-                                          apply_user_name=apply_user_name)
+                                          apply_user_name=apply_user_name, science_type_id=science_type)
     try:
         del request.session['apply_project_id']
     except:
@@ -392,10 +403,11 @@ def submit_review(request):
     request_body = json.loads(request.body)
     project_id = request_body.get('project_id')
     user_name_list = request_body.get('review_list')
-    review_id = uuid.uuid1()
+    print user_name_list
     user_list = UserLoinInterface.get_user_list_by_name_list(user_name_list).get('results')
     temp = ProjectInterface.change_project_status(project_id=project_id, project_status=2)
     for i in user_list:
+        review_id = uuid.uuid1()
         init_review_res = ReviewInterface.init_review(review_id=review_id, review_user_id=i.get('user_id'),
                                                       review_user_name=i.get('user_name'), project_id=project_id)
         if init_review_res.get('code') == 0:
@@ -656,8 +668,72 @@ def get_specialist_group_by_science_type(request):
     :param request:
     :return:
     """
-    specialist_res = UserLoinInterface.get_specialist()
-    specialist = specialist_res.get('results')
-    res = ScienceTypeInterface.get_specialist_group_by_science_type(specialist)
+    res = ScienceTypeInterface.get_specialist_group_by_science()
     res = res
     return render_json(res)
+
+
+def get_project_statement(request):
+    """
+    获取项目报表
+    :param request:
+    :return:
+    """
+    res = ProjectInterface.get_project_statement()
+    return render_json(res)
+
+
+def project_specialist_html(request):
+    """
+    报表页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, '/specialist/project_specialist.html')
+
+
+def get_project_by_project_name(request):
+    """
+    通过项目名称获取
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    project_name = request_body.get('project_name')
+    page = request_body.get('page')
+    page_size = request_body.get('page_size')
+    res = ProjectInterface.get_project_by_project_name(project_name=project_name, page=page, page_size=page_size)
+    return render_json(res)
+
+
+def project_list_html(request):
+    """
+
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'project/project_list.html')
+
+
+def detail_project_html(request):
+    """
+
+    :param request:
+    :return:
+    """
+    try:
+        del request.session['project_id']
+    except:
+        pass
+    project_id = request.GET.get('project_id')
+    request.session['project_id'] = project_id
+    return render_mako_context(request, 'project/detail_project_html.html')
+
+
+def test_html(request):
+    """
+    测试页面
+    :param request:
+    :return:
+    """
+    return render_mako_context(request, 'test.html')
