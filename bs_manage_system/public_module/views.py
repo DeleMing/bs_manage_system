@@ -730,10 +730,35 @@ def detail_project_html(request):
     return render_mako_context(request, 'project/detail_project_html.html')
 
 
+def delete_user_by_user_name(request):
+    """
+    删除用户
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    user_name = request_body.get('user_name')
+    res = UserLoinInterface.delete_user_by_user_name(user_name)
+    return render_json(res)
+
+
+def reset_password_by_user_name(request):
+    """
+    重置密码
+    :param request:
+    :return:
+    """
+    request_body = json.loads(request.body)
+    user_name = request_body.get('user_name')
+    res = UserLoinInterface.reset_password_by_user_name(user_name)
+    return render_json(res)
+
+
 def test_html(request):
     """
     测试页面
     :param request:
     :return:
     """
+
     return render_mako_context(request, 'test.html')

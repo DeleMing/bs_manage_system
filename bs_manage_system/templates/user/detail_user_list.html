@@ -69,8 +69,13 @@
                           @click="update_dialog(scope.row)">
                                 修改
                     </span>
-                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;">
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;"
+                          @click="delete_user(scope.row.user_name)">
                                 删除
+                    </span>
+                    <span class="el-tag el-tag--danger el-tag--mini" style="cursor: pointer;"
+                          @click="reset_password(scope.row.user_name)">
+                                重置密码
                     </span>
                 </div>
             </template>
@@ -81,7 +86,8 @@
     <el-dialog title="请输入用户信息" :visible.sync="dialogFormVisible">
         <el-form :model="user_info">
             <el-form-item label="用户名：">
-                <el-input v-if="user_info.user_id!=''" v-model="user_info.user_name" autocomplete="off" size="mini" :disabled="true"></el-input>
+                <el-input v-if="user_info.user_id!=''" v-model="user_info.user_name" autocomplete="off" size="mini"
+                          :disabled="true"></el-input>
                 <el-input v-else v-model="user_info.user_name" autocomplete="off" size="mini"></el-input>
             </el-form-item>
             <el-form-item label="密码：">
@@ -140,17 +146,17 @@
                 science_type_id: '',
                 user_phone: '',
             },
-            options:[],
+            options: [],
         },
         methods: {
             //获取科研领域
-            get_all_science_type(){
+            get_all_science_type() {
                 axios({
-                    url:'/get_all_science_type/'
-                }).then( res => {
+                    url: '/get_all_science_type/'
+                }).then(res => {
                     console.log(res);
                     vm.options = res.data.results;
-                }).catch( res => {
+                }).catch(res => {
                     console.log(res);
                 })
             },
@@ -206,50 +212,109 @@
 
             },
             //提交用户信息
-            submit_user_info(){
+            submit_user_info() {
                 console.log(vm.user_info)
-                if (vm.user_info.user_id == ''){
+                if (vm.user_info.user_id == '') {
                     //新增
                     console.log('insert');
                     axios({
-                        url:'/add_user_info/',
-                        method:'post',
-                        data:vm.user_info,
-                    }).then( res => {
+                        url: '/add_user_info/',
+                        method: 'post',
+                        data: vm.user_info,
+                    }).then(res => {
                         console.log(res);
-                        if (res.data.code === 0){
+                        if (res.data.code === 0) {
                             vm.$message.success(res.data.message)
                             vm.get_user_list();
                             vm.close_dialog();
-                        }else{
+                        } else {
                             vm.$message.error(res.data.message)
                         }
-                    }).catch( res => {
+                    }).catch(res => {
                         vm.close_dialog();
-                        vm.$message.error('请求出错'+ res)
+                        vm.$message.error('请求出错' + res)
                     })
-                }else {
+                } else {
                     //修改
                     console.log('update');
                     axios({
-                        url:'/update_user_info/',
-                        method:'post',
-                        data:vm.user_info,
-                    }).then( res => {
+                        url: '/update_user_info/',
+                        method: 'post',
+                        data: vm.user_info,
+                    }).then(res => {
                         console.log(res);
-                        if (res.data.code === 0){
+                        if (res.data.code === 0) {
                             vm.$message.success(res.data.message)
                             vm.get_user_list();
                             vm.close_dialog();
-                        }else{
+                        } else {
                             vm.$message.error(res.data.message)
                         }
-                    }).catch( res => {
+                    }).catch(res => {
                         vm.close_dialog();
-                        vm.$message.error('请求出错'+ res)
+                        vm.$message.error('请求出错' + res)
                     })
                 }
             },
+            //重置密码
+            reset_password(user_name) {
+                this.$confirm('是否给用户,' + user_name + '重置密码； 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios({
+                        url:'/reset_password_by_user_name/',
+                        method:'post',
+                        data:{
+                            'user_name':user_name
+                        }
+                    }).then(res => {
+                        this.$message({
+                            type: 'success',
+                            message: '重置密码成功!'
+                        });
+                    }).catch(res => {
+
+                    })
+
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+            //删除用户
+            delete_user(user_name) {
+                this.$confirm('是否给删除用户?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    axios({
+                        url:'/delete_user_by_user_name/',
+                        method:'post',
+                        data:{
+                            'user_name':user_name
+                        }
+                    }).then(res => {
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        vm.get_user_list();
+                    }).catch(res => {
+
+                    })
+
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            }
 
         },
     });

@@ -268,7 +268,6 @@
 
 
     <el-button @click="exportExcel">导出Excel</el-button>
-    <el-button @click="onDocumentLoad">test</el-button>
     <div>{{ test }}</div>
 </div>
 
@@ -314,6 +313,19 @@
                     });
                     saveAs(blob, "export.xls");
                     document.addEventListener('DOMContentLoaded', onDocumentLoad);
+            },
+            exportExcel() {
+                /* generate workbook object from table */
+                let wb = XLSX.utils.table_to_book(document.querySelector('#rebateSetTable'));
+                /* get binary string as output */
+                let wbout = XLSX.write(wb, {bookType: 'xlsx', bookSST: true, type: 'array'});
+                try {
+                    saveAs(new Blob([wbout], {type: 'application/octet-stream'}), '报表.xlsx');
+                } catch (e) {
+                    if (typeof console !== 'undefined')
+                        console.log(e, wbout)
+                }
+                return wbout
             }
         }
 

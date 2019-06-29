@@ -199,3 +199,13 @@ class UserLoinInterface():
         for i in user_list:
             result_list.append(i)
         return result_list
+
+    @classmethod
+    def delete_user_by_user_name(cls, user_name):
+        UserLogin.objects.filter(user_name=user_name).delete()
+        return success_return(u'删除用户成功', None)
+
+    @classmethod
+    def reset_password_by_user_name(cls, user_name):
+        UserLogin.objects.filter(user_name=user_name).update(user_password='123456')
+        return success_return(u'重置密码成功', None)

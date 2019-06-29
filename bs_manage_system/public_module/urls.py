@@ -57,6 +57,9 @@ urlpatterns = patterns(
     (r'^get_project_by_project_name/$', 'get_project_by_project_name'),  # 用户登陆
     (r'^project_list_html/$', 'project_list_html'),  # 用户登陆
     (r'^detail_project_html/$', 'detail_project_html'),  # 用户登陆
+    (r'^delete_user_by_user_name/$', 'delete_user_by_user_name'),  # 删除用户
+    (r'^reset_password_by_user_name/$', 'reset_password_by_user_name'),  # 删除用户
+
     (r'^login_out/$', 'login_out'),  # 用户注销
 
 )

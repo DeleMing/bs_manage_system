@@ -153,7 +153,7 @@ class ProjectInterface():
             except:
                 pass
         else:
-            project = Project.objects.values().filter(project_status=project_status).order_by('-project_time')
+            project = Project.objects.values().filter(project_id__in=project_id_list).order_by('-project_time')
             paginator = Paginator(project, page_size)
             temp_list = paginator.page(page)
             for i in temp_list:
