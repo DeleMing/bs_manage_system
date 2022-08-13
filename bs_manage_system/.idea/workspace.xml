@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="90c727a9-24e8-4896-b62b-f35f9f959cbe" name="Default Changelist" comment="&lt;dev&gt;更新一些说明">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/accessories_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accessories_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bs_manage_system/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bs_manage_system/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bs_manage_system/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bs_manage_system/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_pages/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/notice_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notices_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/project_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/context_processors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/log.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/mymako.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/mymiddleware.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/public_tools.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/review_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/review_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/science_type_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/science_type_module/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/bs_manage_system.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/FileSaver/FileSaver.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/FileSaver/FileSaver.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/FileSaver/FileSaver.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/element-2.4.11/fonts/element-icons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/element-2.4.11/fonts/element-icons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/element-2.4.11/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/element-2.4.11/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/jquery/jquery-3.1.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/js-xlsx/xlsx.full.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/anchor/anchor.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/attachment.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/attachment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/attachment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_chm.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_doc.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_exe.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_jpg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_mp3.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_mv.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_pdf.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_ppt.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_psd.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_rar.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_txt.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/fileTypeImages/icon_xls.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/alignicon.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/alignicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/file-icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/file-icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/progress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/attachment/images/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/background/background.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/background/background.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/background/background.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/background/images/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/background/images/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/chart.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/charts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/charts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/charts/images/charts5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/emotion.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/emotion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/emotion.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/0.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/bface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/cface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/fface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/jxface2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/neweditor-tab-bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/tface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/wface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/emotion/images/yface.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/gmap/gmap.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/help/help.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/help/help.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/help/help.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/image.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/image.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/image.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/alignicon.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/progress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/image/images/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/insertframe/insertframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/internal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/link/link.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/map/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/map/show.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/music/music.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/music/music.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/music/music.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/preview/preview.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/addimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/brush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/delimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/delimgH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/emptyH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/eraser.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/redo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/redoH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/scale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/scaleH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/size.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/undo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/images/undoH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/scrawl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/scrawl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/scrawl/scrawl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/searchreplace/searchreplace.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/searchreplace/searchreplace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/snapscreen/snapscreen.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/spechars/spechars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/spechars/spechars.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/dragicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/edittable.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/edittable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/edittable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/edittd.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/table/edittip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/bg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/pre0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/pre1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/pre2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/pre3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/images/pre4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/template.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/template/template.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/center_focus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/file-icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/file-icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/left_focus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/none_focus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/progress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/right_focus.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/success.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/images/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/video.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/video.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/video/video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/webapp/webapp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/wordimage/fClipboard_ueditor.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/wordimage/imageUploader.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/wordimage/tangram.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/wordimage/wordimage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/dialogs/wordimage/wordimage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/css/ueditor.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/css/ueditor.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/dialogbase.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/anchor.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/arrow_down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/arrow_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/button-bg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/cancelbutton.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/charts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/cursor_h.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/cursor_h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/cursor_v.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/cursor_v.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/dialog-title-bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/filescan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/highlighted.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/icons-all.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/icons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/loaderror.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/loading.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/lock.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/neweditor-tab-bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/pagebreak.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/scale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/sortable.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/spacer.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/sparator_v.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/table-cell-align.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/tangram-colorpicker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/toolbar_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/unhighlighted.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/upload.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/videologo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/word.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/default/images/wordpaste.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/themes/iframe.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/SyntaxHighlighter/shCore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/SyntaxHighlighter/shCoreDefault.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/codemirror/codemirror.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/codemirror/codemirror.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/mootools-adapter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/mootools-adapter.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/prototype-adapter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/prototype-adapter.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/standalone-framework.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/adapters/standalone-framework.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/highcharts-more.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/highcharts-more.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/highcharts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/highcharts.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/annotations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/annotations.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/canvas-tools.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/canvas-tools.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/data.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/drilldown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/drilldown.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/exporting.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/exporting.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/funnel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/funnel.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/heatmap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/heatmap.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/map.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/no-data-to-display.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/modules/no-data-to-display.src.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/themes/dark-blue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/themes/dark-green.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/themes/gray.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/themes/grid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/highcharts/themes/skies.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/jquery-1.10.2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/jquery-1.10.2.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/jquery-1.10.2.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/snapscreen/UEditorSnapscreen.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/font/vjs.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/font/vjs.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/font/vjs.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/font/vjs.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/video-js.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/video-js.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/video-js.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/video.dev.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/video-js/video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/Uploader.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.custom.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.flashonly.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.flashonly.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.html5only.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.html5only.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.withoutimage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/webuploader/webuploader.withoutimage.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/xss.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/zeroclipboard/ZeroClipboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/zeroclipboard/ZeroClipboard.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/third-party/zeroclipboard/ZeroClipboard.swf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/ueditor.all.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/ueditor.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/ueditor1_4_3_3/zh-cn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/vue-2.5.21/axios.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/vue-2.5.21/axios.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/vue-2.5.21/vue.development.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/vue-2.5.21/vue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/common/init.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/common/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ico/error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ico/hoticon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ico/news_incob.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/ico/success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/adm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/avtar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/bg1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/key.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/login/pass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery.base64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/401.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/403.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/500.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/apply/apply_project.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/apply/my_apply.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/admin_main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/apply_main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/login2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/review_main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project/detail_project_html.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project/project_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/review/detail_review.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/review/my_review.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/review/project_to_review.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/right/detail_notice.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/right/insert_notice.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/right/issue_notices.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/science_type/science_type.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/specialist/project_specialist.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/detail_user_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/detail_user_list1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/my_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/user_interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_module/views.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="2DEs1iCu6VGXLsdgEmxjg9W9e6u" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/ProgramData/Miniconda3/Scripts/conda.exe" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Django Server.bs_manage_system">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bs_manage_system" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="bs_manage_system" type="Python.DjangoServer" factoryName="Django server">
+      <module name="bs_manage_system" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="bs_manage_system.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django Server.bs_manage_system" />
+      <item itemvalue="Python.manage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.manage" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90c727a9-24e8-4896-b62b-f35f9f959cbe" name="Default Changelist" comment="" />
+      <created>1660275365305</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660275365305</updated>
+      <workItem from="1660275366755" duration="1033000" />
+      <workItem from="1660282549009" duration="518000" />
+      <workItem from="1660286667615" duration="1154000" />
+      <workItem from="1660298861987" duration="275000" />
+      <workItem from="1660358898597" duration="472000" />
+      <workItem from="1660359399857" duration="23000" />
+      <workItem from="1660359488002" duration="598000" />
+      <workItem from="1660360104053" duration="620000" />
+      <workItem from="1660360771175" duration="3471000" />
+    </task>
+    <task id="LOCAL-00001" summary="&lt;dev&gt;更新一些说明">
+      <created>1660365829390</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1660365829390</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&lt;dev&gt;更新一些说明" />
+    <option name="LAST_COMMIT_MESSAGE" value="&lt;dev&gt;更新一些说明" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/public_module/views.py</url>
+          <line>191</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Python.DjangoServer">
+        <watch expression="self.__language == settings.LANGUAGE_CODE" language="Python" />
+        <watch expression="self.__language" language="Python" />
+        <watch expression="settings.LANGUAGE_CODE" language="Python" />
+        <watch expression="self.__language == settings.LANGUAGE_CODE" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bs_manage_system$manage.coverage" NAME="manage Coverage Results" MODIFIED="1660287661858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
