@@ -115,8 +115,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # 默认用mysql
         'NAME': 'bs_manage_system',  # 数据库名 (默认与APP_ID相同)
         'USER': 'root',  # 你的数据库user
-        'PASSWORD': '123456',  # 你的数据库password
-        'HOST': '127.0.0.1',                                # 开发的时候，使用localhost
+        'PASSWORD': 'admin',  # 你的数据库password
+        'HOST': '192.168.70.110',                                # 开发的时候，使用localhost
         # 'HOST': '47.102.195.55',  # 开发的时候，使用localhost
         'PORT': '3306',  # 默认3306
     },

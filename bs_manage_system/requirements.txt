@@ -1,0 +1,6 @@
+certifi==2020.6.20
+Django==1.8.11
+Mako==1.1.4
+MarkupSafe==1.0
+PyMySQL==0.7.9
+wincertstore==0.2
